@@ -5,9 +5,14 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { X, User, Heart, Users } from "lucide-react"
 
-// To replace icons with images: add `image: "/images/service-name.jpeg"` to each service,
-// then swap <service.icon .../> in the card with an <img src={service.image} .../> tag.
-const services = [
+// To replace icons with images: add `image: "/images/service-name.jpeg"` to each service.
+const services: {
+  title: string
+  description: string
+  icon: typeof User
+  image?: string
+  detail: string
+}[] = [
   {
     title: "Terapia individual",
     description: "Para personas que desean mejorar su bienestar emocional y conocerse mejor.",
