@@ -19,19 +19,18 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-  title: "Dra. Márcia Mendonça - Odontologia Estética e Reabilitação Oral | Pinheiros, São Paulo",
+  title: "María Alejandra Ovalle - Terapeuta en Sexología y Terapia de Pareja",
   description:
-    "Cirurgiã-dentista especializada em Implantodontia e Prótese Dentária. Mais de 11 anos transformando sorrisos com planejamento digital, implantes, facetas e lentes de contato dental em Pinheiros, SP.",
+    "Terapeuta especializada en terapia sexual y de pareja con enfoque cognitivo-conductual. Acompañamiento individual y de pareja para construir relaciones más sanas, conscientes y satisfactorias.",
   keywords:
-    "odontologia estética, implantodontia, prótese dentária, dentista pinheiros, lentes de contato dental, facetas, implantes dentários, clareamento dental, harmonização facial, ortodontia, reabilitação oral",
+    "terapia de pareja, sexología, terapeuta sexual, terapia sexual, terapia cognitivo-conductual, relaciones de pareja, sexóloga, terapia individual",
   openGraph: {
-    title: "Dra. Márcia Mendonça - Odontologia Estética e Reabilitação Oral",
+    title: "María Alejandra Ovalle - Terapeuta en Sexología y Terapia de Pareja",
     description:
-      "Especialista em Implantodontia e Prótese Dentária com mais de 11 anos de experiência em Pinheiros, São Paulo",
+      "Terapeuta especializada en terapia sexual y de pareja con enfoque cognitivo-conductual. Acompañamiento individual y de pareja.",
     type: "website",
-    locale: "pt_BR",
+    locale: "es_ES",
   },
-    generator: 'v0.app'
 }
 
 // Root layout component for the application
@@ -41,25 +40,20 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="pt-BR" className={`${cormorant.variable} ${poppins.variable}`} suppressHydrationWarning>
+    <html lang="es" className={`${cormorant.variable} ${poppins.variable}`} suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Dentist",
-              name: "Dra. Márcia Mendonça - Odontologia Estética e Reabilitação Oral",
-              description: "Especialista em Implantodontia e Prótese Dentária",
-              address: {
-                "@type": "PostalAddress",
-                streetAddress: "Rua Teodoro Sampaio, 352 - cj 14",
-                addressLocality: "Pinheiros",
-                addressRegion: "SP",
-                postalCode: "05406-000",
-                addressCountry: "BR",
-              },
-              priceRange: "$$$",
+              "@type": "ProfessionalService",
+              name: "María Alejandra Ovalle - Terapeuta en Sexología y Terapia de Pareja",
+              description:
+                "Terapeuta especializada en terapia sexual y de pareja con enfoque cognitivo-conductual.",
+              telephone: "+34 666 90 59 70",
+              email: "consulta.mariaterapeuta@gmail.com",
+              url: "https://www.diadica.com/",
             }),
           }}
         />
