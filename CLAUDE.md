@@ -48,15 +48,15 @@ Package manager is **pnpm**.
 ### Styling
 
 - Color palette: coral-red primary (`#FA523C`), orange-red secondary (`#F26749`), warm cream background (`#FAF2E8`)
-- All theme tokens defined in `app/globals.css` — `styles/globals.css` is unused legacy
+- All theme tokens defined in `app/globals.css`
 - Images are unoptimized (`next.config.mjs` sets `images.unoptimized: true`)
 
 ## Known Issues
 
-1. **Stale metadata in `app/layout.tsx`**: Title, description, and JSON-LD schema reference a Brazilian dentist from the v0 template — needs updating to the actual therapist
-2. **Inconsistent WhatsApp numbers**: Some components use a Brazil number (`+55 11 994548206`), others use Spain (`+34 666905970`)
-3. **`components/faq.tsx` is misnamed**: Actually exports a `Pricing` component
-4. **`typescript.ignoreBuildErrors: true`** in `next.config.mjs` suppresses TS errors during builds
+1. **Stale image alt text** — `hero.tsx` still has alt text referencing the v0 template dentist
+2. **Stale hero WhatsApp message** — `hero.tsx` WhatsApp message is in Portuguese, rest of site is Spanish
+3. **Image filenames** — images are still named `dra-marcia-*.jpeg` from the template
+4. **Missing service images** — `services.tsx` has empty `image` strings for all service cards
 
 ## No Environment Variables Required
 
