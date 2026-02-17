@@ -19,7 +19,7 @@ export default function Header({ variant = "default" }: { variant?: "default" | 
 
   const handleWhatsAppClick = () => {
     const message = encodeURIComponent("Hola! Me gustaría agendar una consulta.")
-    window.open(`https://wa.me/5511994548206?text=${message}`, "_blank")
+    window.open(`https://wa.me/34666905970?text=${message}`, "_blank")
   }
 
   return (

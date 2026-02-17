@@ -137,7 +137,7 @@ export default function BeforeAfter() {
           <div className="text-center mt-8">
             <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
               <a
-                href="https://wa.me/5511994548206?text=Ol%C3%A1%20acessei%20seu%20site,%20e%20tenho%20interesse%20em%20marcar%20minha%20consulta"
+                href={`https://wa.me/34666905970?text=${encodeURIComponent("Hola, me gustaría agendar una consulta.")}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >

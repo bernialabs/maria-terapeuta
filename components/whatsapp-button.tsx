@@ -3,7 +3,7 @@
 export default function WhatsAppButton() {
   const handleClick = () => {
     window.open(
-      "https://wa.me/5511994548206?text=Ol%C3%A1%20acessei%20seu%20site,%20e%20tenho%20interesse%20em%20marcar%20minha%20consulta",
+      `https://wa.me/34666905970?text=${encodeURIComponent("Hola, me gustaría agendar una consulta.")}`,
       "_blank",
     )
   }
@@ -12,7 +12,7 @@ export default function WhatsAppButton() {
     <button
       onClick={handleClick}
       className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-[#25D366] hover:bg-[#20BA5A] text-white rounded-full shadow-lg flex items-center justify-center animate-float transition-colors"
-      aria-label="Contato via WhatsApp"
+      aria-label="Contacto vía WhatsApp"
     >
       {/* WhatsApp SVG icon */}
       <svg viewBox="0 0 24 24" className="w-7 h-7" fill="currentColor">

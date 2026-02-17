@@ -6,7 +6,7 @@ import { ArrowRight } from "lucide-react"
 export default function Hero() {
   const handleWhatsAppClick = () => {
     window.open(
-      "https://wa.me/5511994548206?text=Ol%C3%A1%20acessei%20seu%20site,%20e%20tenho%20interesse%20em%20marcar%20minha%20consulta",
+      `https://wa.me/34666905970?text=${encodeURIComponent("Hola, me gustaría agendar una consulta.")}`,
       "_blank",
     )
   }
