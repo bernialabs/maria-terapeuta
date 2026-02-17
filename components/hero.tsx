@@ -1,0 +1,82 @@
+"use client"
+
+import { Button } from "@/components/ui/button"
+import { ArrowRight } from "lucide-react"
+
+export default function Hero() {
+  const handleWhatsAppClick = () => {
+    window.open(
+      "https://wa.me/5511994548206?text=Ol%C3%A1%20acessei%20seu%20site,%20e%20tenho%20interesse%20em%20marcar%20minha%20consulta",
+      "_blank",
+    )
+  }
+
+  return (
+    <section className="relative min-h-screen flex items-center justify-center pt-20 px-4">
+      <div className="container mx-auto">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="order-2 lg:order-1 space-y-8">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif font-light leading-tight text-balance">
+              Terapia y sexología <span className="font-semibold text-secondary">individual y de pareja</span>
+            </h1>
+            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl">
+              {"Explora nuevas formas de establecer conexiones profundas y aprende a transformar tus relaciones en saludables y satisfactorias."}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button
+                size="lg"
+                onClick={handleWhatsAppClick}
+                className="bg-primary hover:bg-primary/90 text-primary-foreground text-base"
+              >
+                Agendar Consulta
+                <ArrowRight className="ml-2" size={20} />
+              </Button>
+              <Button size="lg" variant="outline" asChild className="text-base bg-transparent">
+                <a href="#percepciones">{"Ver reseñas"}</a>
+              </Button>
+            </div>
+            <div className="flex items-center gap-8 pt-4">
+              <div>
+                <div className="text-3xl font-serif font-semibold" style={{ color: "#FA523C" }}>3+</div>
+                <div className="text-sm text-muted-foreground">{"Años de experiencia"}</div>
+              </div>
+              <div className="h-12 w-px bg-border" />
+              <div>
+                <div className="text-base md:text-lg font-serif font-semibold text-secondary">{"Enfoque cognitivo-conductual"}</div>
+              </div>
+            </div>
+          </div>
+          <div className="order-1 lg:order-2 relative flex justify-center lg:justify-end">
+            <div className="w-[70%] sm:w-[60%] md:w-[55%] lg:w-[80%] xl:w-[75%]">
+              <div className="aspect-[3/4] rounded-2xl overflow-hidden bg-muted">
+                <img
+                  src="/images/dra-marcia-1.jpeg"
+                  alt="Dra. Márcia Mendonça - Odontologia Estética"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="absolute -bottom-6 -left-6 w-[38%] aspect-[4/3] rounded-xl overflow-hidden bg-muted border border-border shadow-lg flex items-center justify-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32"
+                  height="32"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="text-muted-foreground"
+                >
+                  <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+                  <circle cx="9" cy="9" r="2" />
+                  <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
