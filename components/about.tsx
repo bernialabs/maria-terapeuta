@@ -15,7 +15,7 @@ export default function About() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="relative max-w-sm lg:max-w-md xl:max-w-lg mx-auto">
             <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-muted">
-              <img src="/images/dra-marcia-4.jpeg" alt={"María Alejandra Ovalle"} className="w-full h-full object-cover" />
+              <img src="/images/maria-alejandra-2.jpeg" alt={"María Alejandra Ovalle"} className="w-full h-full object-cover" />
             </div>
           </div>
 

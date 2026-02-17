@@ -50,8 +50,8 @@ export default function Hero() {
             <div className="w-[70%] sm:w-[60%] md:w-[55%] lg:w-[80%] xl:w-[75%]">
               <div className="aspect-[3/4] rounded-2xl overflow-hidden bg-muted">
                 <img
-                  src="/images/dra-marcia-1.jpeg"
-                  alt="Dra. Márcia Mendonça - Odontologia Estética"
+                  src="/images/maria-alejandra-1.jpeg"
+                  alt="María Alejandra Ovalle - Terapeuta en Sexología y Terapia de Pareja"
                   className="w-full h-full object-cover"
                 />
               </div>

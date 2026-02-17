@@ -51,12 +51,10 @@ Package manager is **pnpm**.
 - All theme tokens defined in `app/globals.css`
 - Images are unoptimized (`next.config.mjs` sets `images.unoptimized: true`)
 
-## Known Issues
+## Pending Assets
 
-1. **Stale image alt text** — `hero.tsx` still has alt text referencing the v0 template dentist
-2. **Stale hero WhatsApp message** — `hero.tsx` WhatsApp message is in Portuguese, rest of site is Spanish
-3. **Image filenames** — images are still named `dra-marcia-*.jpeg` from the template
-4. **Missing service images** — `services.tsx` has empty `image` strings for all service cards
+- **Hero and about images** — `public/images/maria-alejandra-1.jpeg` and `maria-alejandra-2.jpeg` need to be added (referenced by `hero.tsx` and `about.tsx`)
+- **Service images** — `services.tsx` uses Lucide icons as fallback; add an `image` property to each service entry to display photos instead
 
 ## No Environment Variables Required
 

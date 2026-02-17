@@ -3,27 +3,29 @@
 import { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { X } from "lucide-react"
+import { X, User, Heart, Users } from "lucide-react"
 
+// To replace icons with images: add `image: "/images/service-name.jpeg"` to each service,
+// then swap <service.icon .../> in the card with an <img src={service.image} .../> tag.
 const services = [
   {
     title: "Terapia individual",
     description: "Para personas que desean mejorar su bienestar emocional y conocerse mejor.",
-    image: "",
+    icon: User,
     detail:
       "Este es un espacio seguro y confidencial, centrado exclusivamente en ti, donde podrás explorar y comprender tu mundo emocional y personal con mayor profundidad. Te acompaño en tu proceso de autoconocimiento, bienestar y crecimiento individual.\n\nEn terapia individual abordamos temas como:\n\n• Autoestima\n• Duelo\n• Manejo de celos\n• Definición y establecimiento de tus límites\n• Gestión emocional y autorregulación\n• Habilidades sociales (por ejemplo, ligar o relacionarte con mayor seguridad)\n• Dependencia emocional\n\nEl objetivo es ayudarte a identificar patrones, necesidades y límites, para que puedas construir una relación más sana contigo y con los demás.",
   },
   {
     title: "Sexología",
     description: "Para personas o parejas que buscan aclarar dudas y vivir su sexualidad con mayor tranquilidad.",
-    image: "",
+    icon: Heart,
     detail:
       "Este es un espacio individual y especializado para hablar de sexualidad con tranquilidad, confianza y sin juicios. Está pensado para acompañarte en cualquier duda, bloqueo o malestar que esté afectando a tu vivencia sexual.\n\nTrabajamos aspectos como:\n\n• Bajo o alto deseo erótico\n• Dificultades sexuales\n• Dificultades en la lubricación, erección\n• Dificultades en la eyaculación / orgasmo\n• Exploración y comprensión de intereses sexuales\n• Orientación afectivo-sexual\n• Definición y establecimiento de tus límites sexuales",
   },
   {
     title: "Terapia de pareja",
     description: "Para parejas que quieren cuidar, comprender o mejorar su relación.",
-    image: "",
+    icon: Users,
     detail:
       "Este es un espacio seguro y neutral para la pareja, donde ambos podéis sentiros escuchados y comprendidos. Mi objetivo es acompañaros a entender qué está ocurriendo en la relación y cómo podéis volver a conectar desde un lugar más sano.\n\nEn terapia de pareja trabajamos:\n\n• Comunicación\n• Dificultades en la convivencia\n• Diferencias individuales\n• Patrones de evitación - insistencia\n• Dificultades sexuales\n• Inquietudes sexuales\n• Fortalecimiento de la relación",
   },
@@ -45,32 +47,15 @@ export default function Services() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
               <Card key={index} className="overflow-hidden group hover:shadow-lg transition-shadow flex flex-col">
-                <div className="aspect-[3/2] overflow-hidden bg-muted flex items-center justify-center">
+                <div className="aspect-[3/2] overflow-hidden bg-muted/50 flex items-center justify-center">
                   {service.image ? (
                     <img
-                      src={service.image || "/placeholder.svg"}
+                      src={service.image}
                       alt={service.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   ) : (
-                    <div className="flex flex-col items-center gap-2 text-muted-foreground">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="40"
-                        height="40"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
-                        <circle cx="9" cy="9" r="2" />
-                        <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
-                      </svg>
-                      <span className="text-sm">{"Subir imagen"}</span>
-                    </div>
+                    <service.icon className="w-12 h-12 text-secondary/70 group-hover:text-secondary transition-colors" />
                   )}
                 </div>
                 <CardContent className="p-6 flex flex-col flex-1">
