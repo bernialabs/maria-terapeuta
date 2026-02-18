@@ -17,6 +17,7 @@ const services: {
     title: "Terapia individual",
     description: "Para personas que desean mejorar su bienestar emocional y conocerse mejor.",
     icon: User,
+    image: "/images/servicios_terapia_individual.jpg",
     detail:
       "Este es un espacio seguro y confidencial, centrado exclusivamente en ti, donde podrás explorar y comprender tu mundo emocional y personal con mayor profundidad. Te acompaño en tu proceso de autoconocimiento, bienestar y crecimiento individual.\n\nEn terapia individual abordamos temas como:\n\n• Autoestima\n• Duelo\n• Manejo de celos\n• Definición y establecimiento de tus límites\n• Gestión emocional y autorregulación\n• Habilidades sociales (por ejemplo, ligar o relacionarte con mayor seguridad)\n• Dependencia emocional\n\nEl objetivo es ayudarte a identificar patrones, necesidades y límites, para que puedas construir una relación más sana contigo y con los demás.",
   },
@@ -24,6 +25,7 @@ const services: {
     title: "Sexología",
     description: "Para personas o parejas que buscan aclarar dudas y vivir su sexualidad con mayor tranquilidad.",
     icon: Heart,
+    image: "/images/servicios_terapia_sexologia.jpg",
     detail:
       "Este es un espacio individual y especializado para hablar de sexualidad con tranquilidad, confianza y sin juicios. Está pensado para acompañarte en cualquier duda, bloqueo o malestar que esté afectando a tu vivencia sexual.\n\nTrabajamos aspectos como:\n\n• Bajo o alto deseo erótico\n• Dificultades sexuales\n• Dificultades en la lubricación, erección\n• Dificultades en la eyaculación / orgasmo\n• Exploración y comprensión de intereses sexuales\n• Orientación afectivo-sexual\n• Definición y establecimiento de tus límites sexuales",
   },
@@ -31,6 +33,7 @@ const services: {
     title: "Terapia de pareja",
     description: "Para parejas que quieren cuidar, comprender o mejorar su relación.",
     icon: Users,
+    image: "/images/servicios_terapia_de_pareja.jpg",
     detail:
       "Este es un espacio seguro y neutral para la pareja, donde ambos podéis sentiros escuchados y comprendidos. Mi objetivo es acompañaros a entender qué está ocurriendo en la relación y cómo podéis volver a conectar desde un lugar más sano.\n\nEn terapia de pareja trabajamos:\n\n• Comunicación\n• Dificultades en la convivencia\n• Diferencias individuales\n• Patrones de evitación - insistencia\n• Dificultades sexuales\n• Inquietudes sexuales\n• Fortalecimiento de la relación",
   },
