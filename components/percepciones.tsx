@@ -4,25 +4,12 @@ export default function Percepciones() {
       <div className="container mx-auto flex flex-col gap-8">
         {/* First block: image left, text right */}
         <div className="flex flex-col md:flex-row items-stretch gap-0 rounded-2xl border border-border bg-card overflow-hidden">
-          <div className="w-full md:w-auto md:flex-shrink-0 aspect-square md:aspect-auto md:h-auto flex items-center justify-center bg-muted" style={{ maxWidth: "100%", minWidth: 0 }}>
-            <div className="w-full h-full md:w-48 md:h-48 lg:w-56 lg:h-56 flex items-center justify-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="48"
-                height="48"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="text-muted-foreground"
-              >
-                <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
-                <circle cx="9" cy="9" r="2" />
-                <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
-              </svg>
-            </div>
+          <div className="w-full md:w-48 lg:w-56 flex-shrink-0">
+            <img
+              src="/images/percepciones_1_sexo.png"
+              alt="Ilustración sobre sexología"
+              className="w-full h-full object-cover"
+            />
           </div>
           <div className="flex-1 flex items-center p-6 md:p-10">
             <p className="text-lg md:text-xl font-serif text-foreground leading-relaxed">
@@ -42,25 +29,12 @@ export default function Percepciones() {
               {" es la última opción; se recomienda cuando algo no está bien para uno o ambos miembros de la pareja."}
             </p>
           </div>
-          <div className="w-full md:w-auto md:flex-shrink-0 aspect-square md:aspect-auto md:h-auto flex items-center justify-center bg-muted" style={{ maxWidth: "100%", minWidth: 0 }}>
-            <div className="w-full h-full md:w-48 md:h-48 lg:w-56 lg:h-56 flex items-center justify-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="48"
-                height="48"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="text-muted-foreground"
-              >
-                <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
-                <circle cx="9" cy="9" r="2" />
-                <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
-              </svg>
-            </div>
+          <div className="w-full md:w-48 lg:w-56 flex-shrink-0">
+            <img
+              src="/images/percepciones_2_parejas.png"
+              alt="Ilustración sobre terapia de pareja"
+              className="w-full h-full object-cover"
+            />
           </div>
         </div>
       </div>

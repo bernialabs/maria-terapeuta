@@ -351,8 +351,13 @@ export default function DiadicaContent() {
               </p>
             </div>
             <div className="mt-10 flex items-center gap-4 pl-6 md:pl-10">
-              <div className="w-12 h-12 rounded-full bg-muted border border-border flex items-center justify-center">
-                <Users className="w-5 h-5 text-muted-foreground" />
+              <div className="w-12 h-12 rounded-full overflow-hidden">
+                <img
+                  src="/images/maria_alejandra.jpg"
+                  alt="Alejandra Ovalle Zuleta"
+                  className="w-full h-full object-cover"
+                  style={{ objectPosition: "50% -20%", transform: "scale(2) translateX(13%)" }}
+                />
               </div>
               <div>
                 <p className="font-serif font-semibold">
