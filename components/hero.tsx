@@ -55,11 +55,11 @@ export default function Hero() {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="absolute -bottom-6 -left-6 w-[38%] aspect-[4/3] rounded-xl overflow-hidden shadow-lg">
+              <div className="absolute -bottom-6 -left-6 w-[38%] rounded-xl overflow-hidden shadow-lg" style={{ backgroundColor: "#e8cfc0" }}>
                 <img
                   src="/images/recomendacion_hero.png"
                   alt="Reseña de Xavier: 5.0 estrellas - Lo mejor que me ha pasado es recibir su ayuda"
-                  className="w-full h-full object-cover"
+                  className="w-full h-auto"
                 />
               </div>
             </div>
