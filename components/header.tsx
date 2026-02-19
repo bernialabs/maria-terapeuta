@@ -31,18 +31,20 @@ export default function Header({ variant = "default" }: { variant?: "default" | 
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {variant === "diadica" ? (
-            <Link
-              href="/diadica"
-              className="h-8 w-24 rounded-md bg-muted border border-border flex items-center justify-center"
-            >
-              <span className="sr-only">{"Logo Diádica"}</span>
+            <Link href="/diadica">
+              <img
+                src="/images/logo_diadica_completo.png"
+                alt="Logo Diádica"
+                className="h-10 w-auto"
+              />
             </Link>
           ) : (
-            <Link
-              href="/"
-              className="w-8 h-8 rounded-md bg-muted border border-border flex items-center justify-center"
-            >
-              <span className="sr-only">Logo</span>
+            <Link href="/">
+              <img
+                src="/images/logo_maria_terapeuta.png"
+                alt="María Terapeuta"
+                className="h-8 w-auto"
+              />
             </Link>
           )}
 

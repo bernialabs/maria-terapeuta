@@ -8,28 +8,17 @@ export default function Footer({ variant = "default" }: { variant?: "default" | 
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           <div>
             {variant === "diadica" ? (
-              <div className="h-12 w-32 rounded-lg bg-primary-foreground/10 border border-primary-foreground/20 flex items-center justify-center mb-4">
-                <span className="sr-only">{"Logo Diádica"}</span>
-              </div>
+              <img
+                src="/images/logo_diadica_completo.png"
+                alt="Logo Diádica"
+                className="h-10 w-auto mb-4 brightness-0 invert"
+              />
             ) : (
-              <div className="w-16 h-16 rounded-lg bg-primary-foreground/10 border border-primary-foreground/20 flex items-center justify-center mb-4">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="opacity-60"
-                >
-                  <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
-                  <circle cx="9" cy="9" r="2" />
-                  <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
-                </svg>
-              </div>
+              <img
+                src="/images/logo_maria_terapeuta.png"
+                alt="María Terapeuta"
+                className="h-10 w-auto mb-4 brightness-0 invert"
+              />
             )}
             <p className="text-sm opacity-90">{"Terapia y sexología individual y de pareja"}</p>
           </div>
