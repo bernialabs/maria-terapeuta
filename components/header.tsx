@@ -22,6 +22,10 @@ export default function Header({ variant = "default" }: { variant?: "default" | 
     window.open(`https://wa.me/34666905970?text=${message}`, "_blank")
   }
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -39,7 +43,7 @@ export default function Header({ variant = "default" }: { variant?: "default" | 
               />
             </Link>
           ) : (
-            <Link href="/">
+            <Link href="/" onClick={scrollToTop}>
               <img
                 src="/images/logo_maria_terapeuta.png"
                 alt="María Terapeuta"
@@ -50,7 +54,7 @@ export default function Header({ variant = "default" }: { variant?: "default" | 
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
-            <Link href="/" className="text-sm font-medium hover:text-secondary transition-colors">
+            <Link href="/" onClick={scrollToTop} className="text-sm font-medium hover:text-secondary transition-colors">
               Inicio
             </Link>
             <Link href="/test-parejas" className="text-sm font-medium hover:text-secondary transition-colors">
@@ -80,7 +84,7 @@ export default function Header({ variant = "default" }: { variant?: "default" | 
               <Link
                 href="/"
                 className="text-sm font-medium hover:text-secondary transition-colors"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={() => { setIsMobileMenuOpen(false); scrollToTop() }}
               >
                 Inicio
               </Link>

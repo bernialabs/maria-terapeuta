@@ -32,7 +32,7 @@ export default function Hero() {
                 <ArrowRight className="ml-2" size={20} />
               </Button>
               <Button size="lg" variant="outline" asChild className="text-base bg-transparent">
-                <a href="#percepciones">{"Ver reseñas"}</a>
+                <a href="#reseñas">{"Ver reseñas"}</a>
               </Button>
             </div>
             <div className="flex items-center gap-8 pt-4">
