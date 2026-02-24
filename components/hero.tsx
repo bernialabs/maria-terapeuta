@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 
@@ -49,16 +50,22 @@ export default function Hero() {
           <div className="order-1 lg:order-2 relative flex justify-center lg:justify-end">
             <div className="w-[70%] sm:w-[60%] md:w-[55%] lg:w-[80%] xl:w-[75%]">
               <div className="aspect-[3/4] rounded-2xl overflow-hidden bg-muted">
-                <img
+                <Image
                   src="/images/maria-alejandra-1.jpeg"
                   alt="María Alejandra Ovalle - Terapeuta en Sexología y Terapia de Pareja"
+                  width={900}
+                  height={1200}
                   className="w-full h-full object-cover"
+                  sizes="(max-width: 640px) 70vw, (max-width: 768px) 60vw, (max-width: 1024px) 55vw, 40vw"
+                  priority
                 />
               </div>
               <div className="absolute -bottom-6 -left-6 w-[38%] rounded-xl overflow-hidden shadow-lg" style={{ backgroundColor: "#e8cfc0" }}>
-                <img
+                <Image
                   src="/images/recomendacion_hero.png"
                   alt="Reseña de Xavier: 5.0 estrellas - Lo mejor que me ha pasado es recibir su ayuda"
+                  width={564}
+                  height={426}
                   className="w-full h-auto"
                 />
               </div>

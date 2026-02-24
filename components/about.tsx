@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 
@@ -15,7 +16,7 @@ export default function About() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="relative max-w-sm lg:max-w-md xl:max-w-lg mx-auto">
             <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-muted">
-              <img src="/images/maria_alejandra.jpg" alt={"María Alejandra Ovalle"} className="w-full h-full object-cover" />
+              <Image src="/images/maria_alejandra.jpg" alt={"María Alejandra Ovalle"} width={1024} height={1365} className="w-full h-full object-cover" sizes="(max-width: 1024px) 100vw, 50vw" priority />
             </div>
           </div>
 

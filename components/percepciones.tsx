@@ -1,14 +1,18 @@
+import Image from "next/image"
+
 export default function Percepciones() {
   return (
     <section id="percepciones" className="py-24 px-4">
       <div className="container mx-auto flex flex-col gap-8">
         {/* First block: image left, text right */}
         <div className="flex flex-col md:flex-row items-stretch gap-0 rounded-2xl border border-border bg-card overflow-hidden">
-          <div className="w-full md:w-48 lg:w-56 flex-shrink-0">
-            <img
+          <div className="w-full md:w-48 lg:w-56 flex-shrink-0 relative min-h-[200px]">
+            <Image
               src="/images/percepciones_1_sexo.png"
               alt="Ilustración sobre sexología"
-              className="w-full h-full object-cover"
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 224px"
             />
           </div>
           <div className="flex-1 flex items-center p-6 md:p-10">
@@ -29,11 +33,13 @@ export default function Percepciones() {
               {" es la última opción; se recomienda cuando algo no está bien para uno o ambos miembros de la pareja."}
             </p>
           </div>
-          <div className="w-full md:w-48 lg:w-56 flex-shrink-0">
-            <img
+          <div className="w-full md:w-48 lg:w-56 flex-shrink-0 relative min-h-[200px]">
+            <Image
               src="/images/percepciones_2_parejas.png"
               alt="Ilustración sobre terapia de pareja"
-              className="w-full h-full object-cover"
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 224px"
             />
           </div>
         </div>

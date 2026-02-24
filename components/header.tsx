@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 import Link from "next/link"
@@ -36,17 +37,21 @@ export default function Header({ variant = "default" }: { variant?: "default" | 
         <div className="flex items-center justify-between h-20">
           {variant === "diadica" ? (
             <Link href="/diadica">
-              <img
+              <Image
                 src="/images/logo_diadica_completo.png"
                 alt="Logo Diádica"
+                width={1240}
+                height={390}
                 className="h-10 w-auto"
               />
             </Link>
           ) : (
             <Link href="/" onClick={scrollToTop}>
-              <img
+              <Image
                 src="/images/logo_maria_terapeuta.png"
                 alt="María Terapeuta"
+                width={878}
+                height={131}
                 className="h-8 w-auto"
               />
             </Link>

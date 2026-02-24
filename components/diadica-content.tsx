@@ -2,6 +2,7 @@
 
 import type React from "react"
 import { useState } from "react"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -351,12 +352,14 @@ export default function DiadicaContent() {
               </p>
             </div>
             <div className="mt-10 flex items-center gap-4 pl-6 md:pl-10">
-              <div className="w-12 h-12 rounded-full overflow-hidden">
-                <img
+              <div className="w-12 h-12 rounded-full overflow-hidden relative">
+                <Image
                   src="/images/maria_alejandra.jpg"
                   alt="Alejandra Ovalle Zuleta"
-                  className="w-full h-full object-cover"
+                  fill
+                  className="object-cover"
                   style={{ objectPosition: "50% -20%", transform: "scale(2) translateX(13%)" }}
+                  sizes="48px"
                 />
               </div>
               <div>

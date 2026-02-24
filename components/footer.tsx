@@ -1,3 +1,4 @@
+import Image from "next/image"
 import { Instagram, Facebook, Youtube } from "lucide-react"
 import Link from "next/link"
 
@@ -8,15 +9,19 @@ export default function Footer({ variant = "default" }: { variant?: "default" | 
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           <div>
             {variant === "diadica" ? (
-              <img
+              <Image
                 src="/images/logo_diadica_completo.png"
                 alt="Logo Diádica"
+                width={1240}
+                height={390}
                 className="h-10 w-auto mb-4 brightness-0 invert"
               />
             ) : (
-              <img
+              <Image
                 src="/images/logo_maria_terapeuta.png"
                 alt="María Terapeuta"
+                width={878}
+                height={131}
                 className="h-10 w-auto mb-4 brightness-0 invert"
               />
             )}

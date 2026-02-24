@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { X, User, Heart, Users } from "lucide-react"
@@ -57,10 +58,13 @@ export default function Services() {
               <Card key={index} className="overflow-hidden group hover:shadow-lg transition-shadow flex flex-col">
                 <div className="aspect-[3/2] overflow-hidden bg-muted/50 flex items-center justify-center">
                   {service.image ? (
-                    <img
+                    <Image
                       src={service.image}
                       alt={service.title}
+                      width={640}
+                      height={427}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                   ) : (
                     <service.icon className="w-12 h-12 text-secondary/70 group-hover:text-secondary transition-colors" />
