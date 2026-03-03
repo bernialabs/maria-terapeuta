@@ -43,6 +43,7 @@ export default function MonotoniaTestPage() {
               height="800"
               className="w-full min-h-[600px] md:min-h-[800px]"
               title="Test: ¿Tu relación cayó en la monotonía?"
+              loading="lazy"
               allowFullScreen
             >
               Cargando formulario...

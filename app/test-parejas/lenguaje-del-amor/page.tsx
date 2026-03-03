@@ -43,6 +43,7 @@ export default function LenguajeDelAmorTestPage() {
               height="800"
               className="w-full min-h-[600px] md:min-h-[800px]"
               title="Test: ¿Cuál es mi lenguaje del amor para dar y recibir?"
+              loading="lazy"
               allowFullScreen
             >
               Cargando formulario...

@@ -4,7 +4,8 @@ import { useState } from "react"
 import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { X, User, Heart, Users } from "lucide-react"
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
+import { User, Heart, Users } from "lucide-react"
 
 // To replace icons with images: add `image: "/images/service-name.jpeg"` to each service.
 const services: {
@@ -87,37 +88,18 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Bottom sheet modal */}
-      {activeService !== null && (
-        <div className="fixed inset-0 z-50 flex items-end justify-center">
-          <div
-            className="absolute inset-0 bg-black/40 backdrop-blur-sm"
-            onClick={() => setActiveService(null)}
-            onKeyDown={(e) => {
-              if (e.key === "Escape") setActiveService(null)
-            }}
-            role="button"
-            tabIndex={0}
-            aria-label="Cerrar"
-          />
-          <div className="relative w-full max-w-2xl bg-background rounded-t-2xl shadow-2xl p-8 pb-10 animate-in slide-in-from-bottom duration-300">
-            <button
-              type="button"
-              onClick={() => setActiveService(null)}
-              className="absolute top-4 right-4 p-2 rounded-full hover:bg-muted transition-colors"
-              aria-label="Cerrar"
-            >
-              <X className="w-5 h-5" />
-            </button>
-            <h3 className="text-2xl font-serif font-semibold mb-4">
-              {services[activeService].title}
-            </h3>
-            <p className="text-muted-foreground leading-relaxed whitespace-pre-line">
-              {services[activeService].detail || services[activeService].description}
-            </p>
-          </div>
-        </div>
-      )}
+      <Dialog open={activeService !== null} onOpenChange={(open) => { if (!open) setActiveService(null) }}>
+        <DialogContent className="max-w-2xl">
+          <DialogTitle className="text-2xl font-serif font-semibold">
+            {activeService !== null ? services[activeService].title : ""}
+          </DialogTitle>
+          <p className="text-muted-foreground leading-relaxed whitespace-pre-line">
+            {activeService !== null
+              ? (services[activeService].detail || services[activeService].description)
+              : ""}
+          </p>
+        </DialogContent>
+      </Dialog>
     </>
   )
 }

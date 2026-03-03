@@ -3,21 +3,21 @@ import { Card, CardContent } from "@/components/ui/card"
 const steps = [
   {
     number: "01",
-    title: "Avaliação Completa",
+    title: "Primera Consulta",
     description:
-      "Análise detalhada do seu sorriso com tecnologia 3D. Entendemos suas expectativas e criamos um plano personalizado.",
+      "Nos conocemos en un espacio seguro y confidencial. Escucho tu situación, tus necesidades y definimos juntos los objetivos terapéuticos.",
   },
   {
     number: "02",
-    title: "Planejamento Digital",
+    title: "Plan Personalizado",
     description:
-      "Visualize seu novo sorriso antes de começar. Aprovamos juntos cada detalhe para garantir o resultado perfeito.",
+      "Diseñamos un plan de tratamiento adaptado a ti, integrando técnicas cognitivo-conductuales y sexológicas según tu caso específico.",
   },
   {
     number: "03",
-    title: "Transformação",
+    title: "Acompañamiento Continuo",
     description:
-      "Execução precisa do tratamento com acompanhamento em cada etapa. Conforto e segurança do início ao fim.",
+      "Avanzamos juntos sesión a sesión, midiendo el progreso y ajustando el camino para que alcances el bienestar que mereces.",
   },
 ]
 
@@ -27,15 +27,15 @@ export default function Process() {
       <div className="container mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-serif font-light mb-4">
-            Como funciona o <span className="font-semibold text-secondary">processo</span>
+            Cómo funciona el <span className="font-semibold text-secondary">proceso</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Um caminho simples e transparente para o sorriso que você sempre sonhou
+            Un camino claro y acompañado hacia relaciones más saludables y satisfactorias
           </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8 relative">
-          {/* Connection lines for desktop */}
+          {/* Connection line for desktop */}
           <div className="hidden md:block absolute top-24 left-0 right-0 h-px bg-border -z-10" />
 
           {steps.map((step, index) => (

@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { Clock, Video, MessageCircle } from "lucide-react"
+import { whatsappUrl } from "@/lib/constants"
 
 const plans = [
   {
@@ -35,8 +36,7 @@ const plans = [
 
 export default function Pricing() {
   const handleReservar = () => {
-    const message = encodeURIComponent("Hola, me gustaría reservar una cita.")
-    window.open(`https://wa.me/5511999999999?text=${message}`, "_blank")
+    window.open(whatsappUrl("Hola, me gustaría reservar una cita."), "_blank")
   }
 
   return (

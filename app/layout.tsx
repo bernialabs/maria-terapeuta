@@ -55,7 +55,7 @@ export default function RootLayout({
                 "Terapeuta especializada en terapia sexual y de pareja con enfoque cognitivo-conductual.",
               telephone: "+34 666 90 59 70",
               email: "consulta.mariaterapeuta@gmail.com",
-              url: "https://www.diadica.com/",
+              url: "https://mariaterapeuta.com",
             }),
           }}
         />

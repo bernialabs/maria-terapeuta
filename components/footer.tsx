@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { Instagram, Facebook, Youtube } from "lucide-react"
 import Link from "next/link"
+import { SOCIAL_LINKS } from "@/lib/constants"
 
 export default function Footer({ variant = "default" }: { variant?: "default" | "diadica" }) {
   return (
@@ -74,7 +75,7 @@ export default function Footer({ variant = "default" }: { variant?: "default" | 
             <h4 className="font-semibold mb-4">Redes Sociales</h4>
             <div className="flex gap-4">
               <a
-                href="https://instagram.com"
+                href={SOCIAL_LINKS.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:opacity-100 opacity-90 transition-opacity"
@@ -83,7 +84,7 @@ export default function Footer({ variant = "default" }: { variant?: "default" | 
                 <Instagram size={24} />
               </a>
               <a
-                href="https://facebook.com"
+                href={SOCIAL_LINKS.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:opacity-100 opacity-90 transition-opacity"
@@ -92,7 +93,7 @@ export default function Footer({ variant = "default" }: { variant?: "default" | 
                 <Facebook size={24} />
               </a>
               <a
-                href="https://youtube.com"
+                href={SOCIAL_LINKS.youtube}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:opacity-100 opacity-90 transition-opacity"

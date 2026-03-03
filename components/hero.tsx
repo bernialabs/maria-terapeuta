@@ -3,13 +3,11 @@
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
+import { whatsappUrl } from "@/lib/constants"
 
 export default function Hero() {
   const handleWhatsAppClick = () => {
-    window.open(
-      `https://wa.me/34666905970?text=${encodeURIComponent("Hola, me gustaría agendar una consulta.")}`,
-      "_blank",
-    )
+    window.open(whatsappUrl("Hola, me gustaría agendar una consulta."), "_blank")
   }
 
   return (
@@ -38,7 +36,7 @@ export default function Hero() {
             </div>
             <div className="flex items-center gap-8 pt-4">
               <div>
-                <div className="text-3xl font-serif font-semibold" style={{ color: "#FA523C" }}>3+</div>
+                <div className="text-3xl font-serif font-semibold text-primary">3+</div>
                 <div className="text-sm text-muted-foreground">{"Años de experiencia"}</div>
               </div>
               <div className="h-12 w-px bg-border" />

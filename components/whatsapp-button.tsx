@@ -1,11 +1,10 @@
 "use client"
 
+import { whatsappUrl } from "@/lib/constants"
+
 export default function WhatsAppButton() {
   const handleClick = () => {
-    window.open(
-      `https://wa.me/34666905970?text=${encodeURIComponent("Hola, me gustaría agendar una consulta.")}`,
-      "_blank",
-    )
+    window.open(whatsappUrl("Hola, me gustaría agendar una consulta."), "_blank")
   }
 
   return (

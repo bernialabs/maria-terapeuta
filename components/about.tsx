@@ -3,11 +3,11 @@
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
+import { whatsappUrl } from "@/lib/constants"
 
 export default function About() {
   const handleWhatsAppClick = () => {
-    const message = encodeURIComponent("Hola, me gustaría agendar una consulta.")
-    window.open(`https://wa.me/34666905970?text=${message}`, "_blank")
+    window.open(whatsappUrl("Hola, me gustaría agendar una consulta."), "_blank")
   }
 
   return (
@@ -22,7 +22,7 @@ export default function About() {
 
           <div className="space-y-6">
             <h2 className="text-4xl md:text-5xl font-serif font-light leading-tight">
-              {"Hola, soy "}<span className="font-semibold" style={{ color: "#FA523C" }}>{"María Alejandra Ovalle"}</span>
+              {"Hola, soy "}<span className="font-semibold text-primary">{"María Alejandra Ovalle"}</span>
             </h2>
             <p className="text-2xl md:text-3xl font-serif text-secondary">
               {"Terapeuta especializada en terapia sexual y de pareja"}
@@ -34,7 +34,7 @@ export default function About() {
               {"Mi propósito es acompañarte, a nivel individual o en pareja, en la construcción de relaciones más sanas, conscientes y satisfactorias."}
             </p>
 
-            <h3 className="text-2xl font-serif font-semibold pt-2" style={{ color: "#FA523C" }}>
+            <h3 className="text-2xl font-serif font-semibold pt-2 text-primary">
               {"¿Qué puedes trabajar y lograr en las sesiones?"}
             </h3>
             <ul className="space-y-3 text-lg text-muted-foreground leading-relaxed">

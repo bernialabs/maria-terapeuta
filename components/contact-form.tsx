@@ -1,28 +1,40 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
+import { WHATSAPP_NUMBER } from "@/lib/constants"
+import { contactFormSchema, type ContactFormData, type ContactFormErrors } from "@/lib/schemas"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent } from "@/components/ui/card"
 
 export default function ContactForm() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    message: "",
-  })
+  const [formData, setFormData] = useState<ContactFormData>({ name: "", email: "", phone: "", message: "" })
+  const [errors, setErrors] = useState<ContactFormErrors>({})
+
+  const update = (field: keyof ContactFormData) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData((prev) => ({ ...prev, [field]: e.target.value }))
+    if (errors[field]) setErrors((prev) => ({ ...prev, [field]: undefined }))
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    const message = encodeURIComponent(
-      `Hola! Mi nombre es ${formData.name}.\n\nTeléfono: ${formData.phone}\nEmail: ${formData.email}\n\nMensaje: ${formData.message}`,
-    )
-    window.open(`https://wa.me/34666905970?text=${message}`, "_blank")
+    const result = contactFormSchema.safeParse(formData)
+    if (!result.success) {
+      const fieldErrors: ContactFormErrors = {}
+      result.error.issues.forEach((err) => {
+        const field = err.path[0] as keyof ContactFormData
+        if (!fieldErrors[field]) fieldErrors[field] = err.message
+      })
+      setErrors(fieldErrors)
+      return
+    }
+    setErrors({})
+    const { name, phone, email, message } = result.data
+    const text = `Hola! Mi nombre es ${name}.\n\nTeléfono: ${phone}\nEmail: ${email}\n\nMensaje: ${message}`
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, "_blank")
   }
 
   return (
@@ -39,41 +51,47 @@ export default function ContactForm() {
 
         <Card className="border-none shadow-lg">
           <CardContent className="p-8">
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6" noValidate>
               <div className="space-y-2">
                 <Label htmlFor="name">Nombre completo</Label>
                 <Input
                   id="name"
                   placeholder="Tu nombre"
                   value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  required
+                  onChange={update("name")}
+                  aria-invalid={!!errors.name}
+                  aria-describedby={errors.name ? "name-error" : undefined}
                 />
+                {errors.name && <p id="name-error" className="text-xs text-destructive">{errors.name}</p>}
               </div>
 
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="tu@email.com"
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="tu@email.com"
                     value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    required
+                    onChange={update("email")}
+                    aria-invalid={!!errors.email}
+                    aria-describedby={errors.email ? "email-error" : undefined}
                   />
+                  {errors.email && <p id="email-error" className="text-xs text-destructive">{errors.email}</p>}
                 </div>
 
                 <div className="space-y-2">
-                <Label htmlFor="phone">{"Teléfono"}</Label>
-                <Input
-                  id="phone"
-                  type="tel"
-                  placeholder="+34 600 000 000"
+                  <Label htmlFor="phone">{"Teléfono"}</Label>
+                  <Input
+                    id="phone"
+                    type="tel"
+                    placeholder="+34 600 000 000"
                     value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    required
+                    onChange={update("phone")}
+                    aria-invalid={!!errors.phone}
+                    aria-describedby={errors.phone ? "phone-error" : undefined}
                   />
+                  {errors.phone && <p id="phone-error" className="text-xs text-destructive">{errors.phone}</p>}
                 </div>
               </div>
 
@@ -84,9 +102,11 @@ export default function ContactForm() {
                   placeholder={"Cuéntame en qué puedo ayudarte..."}
                   rows={5}
                   value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  required
+                  onChange={update("message")}
+                  aria-invalid={!!errors.message}
+                  aria-describedby={errors.message ? "message-error" : undefined}
                 />
+                {errors.message && <p id="message-error" className="text-xs text-destructive">{errors.message}</p>}
               </div>
 
               <Button type="submit" size="lg" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">

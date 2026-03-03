@@ -5,6 +5,7 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 import Link from "next/link"
+import { whatsappUrl } from "@/lib/constants"
 
 export default function Header({ variant = "default" }: { variant?: "default" | "diadica" }) {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -19,8 +20,7 @@ export default function Header({ variant = "default" }: { variant?: "default" | 
   }, [])
 
   const handleWhatsAppClick = () => {
-    const message = encodeURIComponent("Hola! Me gustaría agendar una consulta.")
-    window.open(`https://wa.me/34666905970?text=${message}`, "_blank")
+    window.open(whatsappUrl("Hola! Me gustaría agendar una consulta."), "_blank")
   }
 
   const scrollToTop = () => {

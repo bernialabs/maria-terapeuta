@@ -2,6 +2,8 @@
 
 import type React from "react"
 import { useState } from "react"
+import { WHATSAPP_NUMBER } from "@/lib/constants"
+import { contactFormSchema, type ContactFormData, type ContactFormErrors } from "@/lib/schemas"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -382,19 +384,30 @@ export default function DiadicaContent() {
 }
 
 function DiadicaContactForm() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    message: "",
-  })
+  const [formData, setFormData] = useState<ContactFormData>({ name: "", email: "", phone: "", message: "" })
+  const [errors, setErrors] = useState<ContactFormErrors>({})
+
+  const update = (field: keyof ContactFormData) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData((prev) => ({ ...prev, [field]: e.target.value }))
+    if (errors[field]) setErrors((prev) => ({ ...prev, [field]: undefined }))
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    const message = encodeURIComponent(
-      `Hola! Me interesa probar Diádica.\n\nMi nombre es ${formData.name}.\nTeléfono: ${formData.phone}\nEmail: ${formData.email}\n\nMensaje: ${formData.message}`,
-    )
-    window.open(`https://wa.me/34666905970?text=${message}`, "_blank")
+    const result = contactFormSchema.safeParse(formData)
+    if (!result.success) {
+      const fieldErrors: ContactFormErrors = {}
+      result.error.issues.forEach((err) => {
+        const field = err.path[0] as keyof ContactFormData
+        if (!fieldErrors[field]) fieldErrors[field] = err.message
+      })
+      setErrors(fieldErrors)
+      return
+    }
+    setErrors({})
+    const { name, phone, email, message } = result.data
+    const text = `Hola! Me interesa probar Diádica.\n\nMi nombre es ${name}.\nTeléfono: ${phone}\nEmail: ${email}\n\nMensaje: ${message}`
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, "_blank")
   }
 
   return (
@@ -412,16 +425,18 @@ function DiadicaContactForm() {
 
         <Card className="border-none shadow-lg">
           <CardContent className="p-8">
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6" noValidate>
               <div className="space-y-2">
                 <Label htmlFor="diadica-name">Nombre completo</Label>
                 <Input
                   id="diadica-name"
                   placeholder="Tu nombre"
                   value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  required
+                  onChange={update("name")}
+                  aria-invalid={!!errors.name}
+                  aria-describedby={errors.name ? "diadica-name-error" : undefined}
                 />
+                {errors.name && <p id="diadica-name-error" className="text-xs text-destructive">{errors.name}</p>}
               </div>
 
               <div className="grid md:grid-cols-2 gap-6">
@@ -432,9 +447,11 @@ function DiadicaContactForm() {
                     type="email"
                     placeholder="tu@email.com"
                     value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    required
+                    onChange={update("email")}
+                    aria-invalid={!!errors.email}
+                    aria-describedby={errors.email ? "diadica-email-error" : undefined}
                   />
+                  {errors.email && <p id="diadica-email-error" className="text-xs text-destructive">{errors.email}</p>}
                 </div>
 
                 <div className="space-y-2">
@@ -444,9 +461,11 @@ function DiadicaContactForm() {
                     type="tel"
                     placeholder="+34 600 000 000"
                     value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    required
+                    onChange={update("phone")}
+                    aria-invalid={!!errors.phone}
+                    aria-describedby={errors.phone ? "diadica-phone-error" : undefined}
                   />
+                  {errors.phone && <p id="diadica-phone-error" className="text-xs text-destructive">{errors.phone}</p>}
                 </div>
               </div>
 
@@ -457,9 +476,11 @@ function DiadicaContactForm() {
                   placeholder={"Cuéntame en qué puedo ayudarte..."}
                   rows={5}
                   value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  required
+                  onChange={update("message")}
+                  aria-invalid={!!errors.message}
+                  aria-describedby={errors.message ? "diadica-message-error" : undefined}
                 />
+                {errors.message && <p id="diadica-message-error" className="text-xs text-destructive">{errors.message}</p>}
               </div>
 
               <Button type="submit" size="lg" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
