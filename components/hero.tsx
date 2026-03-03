@@ -49,13 +49,13 @@ export default function Hero() {
           </div>
           <div className="order-1 lg:order-2 relative flex justify-center lg:justify-end">
             <div className="w-[70%] sm:w-[60%] md:w-[55%] lg:w-[80%] xl:w-[75%]">
-              <div className="aspect-[3/4] rounded-2xl overflow-hidden bg-muted">
+              <div className="aspect-[3/4]">
                 <Image
-                  src="/images/maria-alejandra-1.jpeg"
+                  src="/images/maria-alejandra-1.png"
                   alt="María Alejandra Ovalle - Terapeuta en Sexología y Terapia de Pareja"
                   width={900}
                   height={1200}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-top"
                   sizes="(max-width: 640px) 70vw, (max-width: 768px) 60vw, (max-width: 1024px) 55vw, 40vw"
                   priority
                 />
