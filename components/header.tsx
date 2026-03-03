@@ -30,7 +30,7 @@ export default function Header({ variant = "default" }: { variant?: "default" | 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-background/95 backdrop-blur-sm shadow-sm" : "bg-transparent"
+        isScrolled || isMobileMenuOpen ? "bg-background/95 backdrop-blur-sm shadow-md" : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-4">
@@ -84,7 +84,7 @@ export default function Header({ variant = "default" }: { variant?: "default" | 
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <nav className="md:hidden py-4 border-t border-border">
+          <nav className="md:hidden py-4 border-t border-muted-foreground/25">
             <div className="flex flex-col gap-4">
               <Link
                 href="/"

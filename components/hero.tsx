@@ -60,7 +60,7 @@ export default function Hero() {
                   priority
                 />
               </div>
-              <div className="absolute -bottom-6 -left-6 w-[38%] rounded-xl overflow-hidden shadow-lg" style={{ backgroundColor: "#e8cfc0" }}>
+              <div className="absolute -bottom-6 left-2 lg:-left-6 w-[38%] rounded-xl overflow-hidden shadow-lg" style={{ backgroundColor: "#e8cfc0" }}>
                 <Image
                   src="/images/recomendacion_hero.png"
                   alt="Reseña de Xavier: 5.0 estrellas - Lo mejor que me ha pasado es recibir su ayuda"
