@@ -19,6 +19,7 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://mariaterapeuta.com"),
   title: "María Alejandra Ovalle - Terapeuta en Sexología y Terapia de Pareja",
   description:
     "Terapeuta especializada en terapia sexual y de pareja con enfoque cognitivo-conductual. Acompañamiento individual y de pareja para construir relaciones más sanas, conscientes y satisfactorias.",
@@ -28,6 +29,7 @@ export const metadata: Metadata = {
     title: "María Alejandra Ovalle - Terapeuta en Sexología y Terapia de Pareja",
     description:
       "Terapeuta especializada en terapia sexual y de pareja con enfoque cognitivo-conductual. Acompañamiento individual y de pareja.",
+    url: "https://mariaterapeuta.com",
     type: "website",
     locale: "es_ES",
   },
