@@ -356,11 +356,11 @@ export default function DiadicaContent() {
             <div className="mt-10 flex items-center gap-4 pl-6 md:pl-10">
               <div className="w-12 h-12 rounded-full overflow-hidden relative">
                 <Image
-                  src="/images/maria_alejandra.jpg"
+                  src="/images/maria_alejandra_diadica.jpg"
                   alt="Alejandra Ovalle Zuleta"
                   fill
                   className="object-cover"
-                  style={{ objectPosition: "50% -20%", transform: "scale(2) translateX(13%)" }}
+                  style={{ objectPosition: "50% 10%" }}
                   sizes="48px"
                 />
               </div>

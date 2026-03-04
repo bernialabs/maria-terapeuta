@@ -15,9 +15,7 @@ export default function About() {
       <div className="container mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="relative max-w-sm lg:max-w-md xl:max-w-lg mx-auto">
-            <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-muted">
-              <Image src="/images/maria_alejandra.jpg" alt={"María Alejandra Ovalle"} width={1024} height={1365} className="w-full h-full object-cover" sizes="(max-width: 1024px) 100vw, 50vw" priority />
-            </div>
+            <Image src="/images/maria_alejandra.png" alt={"María Alejandra Ovalle"} width={1024} height={1365} className="w-full h-full object-contain" sizes="(max-width: 1024px) 100vw, 50vw" priority />
           </div>
 
           <div className="space-y-6">
