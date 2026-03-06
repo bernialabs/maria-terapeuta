@@ -19,7 +19,7 @@ const poppins = Poppins({
 })
 
 const siteDescription =
-  "Terapeuta especializada en terapia sexual y de pareja con enfoque cognitivo-conductual. Acompañamiento individual y de pareja para construir relaciones más sanas, conscientes y satisfactorias."
+  "Terapia de pareja y sexología online para España y Latinoamérica. Sesiones individuales y de pareja con enfoque cognitivo-conductual desde Madrid."
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://mariaterapeuta.com"),
@@ -29,14 +29,14 @@ export const metadata: Metadata = {
   },
   description: siteDescription,
   keywords:
-    "terapia de pareja, sexología, terapeuta sexual, terapia sexual, terapia cognitivo-conductual, relaciones de pareja, sexóloga, terapia individual",
+    "terapia de pareja online, terapeuta online España, sexóloga online, terapia sexual online, terapeuta Madrid, terapia de pareja, sexología, terapeuta sexual, terapia sexual, terapia cognitivo-conductual, relaciones de pareja, sexóloga, terapia individual",
   alternates: {
     canonical: "https://mariaterapeuta.com",
   },
   openGraph: {
     title: "María Alejandra Ovalle - Terapeuta en Sexología y Terapia de Pareja",
     description:
-      "Terapeuta especializada en terapia sexual y de pareja con enfoque cognitivo-conductual. Acompañamiento individual y de pareja.",
+      "Terapia de pareja y sexología online para España y Latinoamérica. Sesiones individuales y de pareja con enfoque cognitivo-conductual desde Madrid.",
     url: "https://mariaterapeuta.com",
     type: "website",
     locale: "es_ES",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "María Alejandra Ovalle - Terapeuta en Sexología y Terapia de Pareja",
     description:
-      "Terapeuta especializada en terapia sexual y de pareja con enfoque cognitivo-conductual. Acompañamiento individual y de pareja.",
+      "Terapia de pareja y sexología online para España y Latinoamérica. Sesiones individuales y de pareja con enfoque cognitivo-conductual desde Madrid.",
   },
 }
 
@@ -53,14 +53,26 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "ProfessionalService",
+      "@type": ["ProfessionalService", "MedicalBusiness"],
       "@id": "https://mariaterapeuta.com/#service",
+      medicalSpecialty: "Sexología y Terapia de Pareja",
       name: "María Alejandra Ovalle - Terapeuta en Sexología y Terapia de Pareja",
       description:
-        "Terapeuta especializada en terapia sexual y de pareja con enfoque cognitivo-conductual.",
+        "Terapia de pareja y sexología online para España y Latinoamérica, con enfoque cognitivo-conductual desde Madrid.",
       telephone: "+34 666 90 59 70",
       email: "consulta.mariaterapeuta@gmail.com",
       url: "https://mariaterapeuta.com",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Madrid",
+        addressRegion: "Comunidad de Madrid",
+        addressCountry: "ES",
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: 40.4168,
+        longitude: -3.7038,
+      },
       priceRange: "€35-€55 por sesión",
       openingHoursSpecification: [
         {
@@ -76,7 +88,12 @@ const jsonLd = {
           closes: "17:00",
         },
       ],
-      areaServed: ["España", "Latinoamérica"],
+      areaServed: [
+        { "@type": "Country", name: "España" },
+        { "@type": "Country", name: "Colombia" },
+        { "@type": "Country", name: "México" },
+        { "@type": "Country", name: "Argentina" },
+      ],
       availableLanguage: "Spanish",
       sameAs: [
         "https://www.instagram.com/diadicaoficial",
@@ -136,6 +153,16 @@ availableLanguage: "Spanish",
       jobTitle: "Terapeuta en Sexología y Terapia de Pareja",
       image: "https://mariaterapeuta.com/images/maria_alejandra.png",
       url: "https://mariaterapeuta.com",
+      hasCredential: {
+        "@type": "EducationalOccupationalCredential",
+        credentialCategory: "Tarjeta Profesional de Psicólogo",
+        identifier: "194533",
+        recognizedBy: {
+          "@type": "Organization",
+          name: "Colegio Colombiano de Psicólogos (COLPSIC)",
+          addressCountry: "CO",
+        },
+      },
       sameAs: [
         "https://www.instagram.com/diadicaoficial",
         "https://www.linkedin.com/in/ma-alejandra-ovalle-zuleta-8135a2124",
