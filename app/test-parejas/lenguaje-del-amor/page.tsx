@@ -40,12 +40,12 @@ const jsonLd = {
       ],
     },
     {
-      "@type": "Quiz",
+      "@type": "LearningResource",
+      learningResourceType: "Quiz",
       name: "Test: ¿Cuál es mi lenguaje del amor para dar y recibir?",
       description:
         "Identifica cómo expresas y necesitas recibir amor. Conocer tu lenguaje emocional transformará la forma en que te conectas con tu pareja.",
       url: "https://mariaterapeuta.com/test-parejas/lenguaje-del-amor",
-      educationalUse: "Self-assessment",
       inLanguage: "es",
     },
   ],

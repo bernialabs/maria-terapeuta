@@ -40,11 +40,11 @@ const jsonLd = {
       ],
     },
     {
-      "@type": "Quiz",
+      "@type": "LearningResource",
+      learningResourceType: "Quiz",
       name: "Test de Monotonía en la Pareja",
       description: "Descubre si la rutina se ha apoderado de tu relación y encuentra claves para reavivar la chispa.",
       url: "https://mariaterapeuta.com/test-parejas/monotonia",
-      educationalUse: "Self-assessment",
       inLanguage: "es",
     },
   ],
