@@ -12,7 +12,7 @@ export default function Footer({ variant = "default" }: { variant?: "default" | 
             {variant === "diadica" ? (
               <Image
                 src="/images/logo_diadica_completo.png"
-                alt="Logo Diádica"
+                alt="Logo Diadica"
                 width={1240}
                 height={390}
                 className="h-10 w-auto mb-4 brightness-0 invert"
@@ -44,7 +44,7 @@ export default function Footer({ variant = "default" }: { variant?: "default" | 
               </li>
               <li>
                 <Link href="/diadica" className="hover:opacity-100 transition-opacity">
-                  {"Diádica"}
+                  {"Diadica"}
                 </Link>
               </li>
             </ul>

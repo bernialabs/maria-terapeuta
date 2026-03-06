@@ -6,9 +6,48 @@ import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "¿Tu relación cayó en la monotonía? | Test Gratuito",
+  title: "Test de Monotonía en la Pareja — Gratis",
   description:
     "Descubre si la rutina se ha apoderado de tu relación y encuentra claves para reavivar la chispa con este test gratuito para parejas.",
+  alternates: {
+    canonical: "https://mariaterapeuta.com/test-parejas/monotonia",
+  },
+  openGraph: {
+    title: "Test de Monotonía en la Pareja — Gratis",
+    description:
+      "Descubre si la rutina se ha apoderado de tu relación y encuentra claves para reavivar la chispa con este test gratuito para parejas.",
+    url: "https://mariaterapeuta.com/test-parejas/monotonia",
+    type: "website",
+    locale: "es_ES",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Test de Monotonía en la Pareja — Gratis",
+    description:
+      "Descubre si la rutina se ha apoderado de tu relación y encuentra claves para reavivar la chispa con este test gratuito para parejas.",
+  },
+}
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Inicio", item: "https://mariaterapeuta.com" },
+        { "@type": "ListItem", position: 2, name: "Test Parejas", item: "https://mariaterapeuta.com/test-parejas" },
+        { "@type": "ListItem", position: 3, name: "Test de Monotonía en la Pareja" },
+      ],
+    },
+    {
+      "@type": "Quiz",
+      name: "Test de Monotonía en la Pareja",
+      description: "Descubre si la rutina se ha apoderado de tu relación y encuentra claves para reavivar la chispa.",
+      url: "https://mariaterapeuta.com/test-parejas/monotonia",
+      educationalUse: "Self-assessment",
+      inLanguage: "es",
+    },
+  ],
 }
 
 export default function MonotoniaTestPage() {
@@ -16,6 +55,12 @@ export default function MonotoniaTestPage() {
     <>
       <Header />
       <main className="min-h-screen pt-28 pb-20 px-4">
+        <script
+          type="application/ld+json"
+          // JSON-LD structured data — static, trusted content, no user input
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: static JSON-LD
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <div className="container mx-auto max-w-4xl">
           <Link
             href="/test-parejas"

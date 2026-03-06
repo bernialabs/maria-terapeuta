@@ -122,7 +122,7 @@ export default function DiadicaContent() {
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto mb-10">
             {
-              "Diádica es la aplicación que combina ciencia y tecnología para ayudarte a cuidar, fortalecer y reavivar tu relación de pareja cada día."
+              "Diadica es la aplicación que combina ciencia y tecnología para ayudarte a cuidar, fortalecer y reavivar tu relación de pareja cada día."
             }
           </p>
           <Button
@@ -135,7 +135,7 @@ export default function DiadicaContent() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              {"Únete a Diádica"}
+              {"Únete a Diadica"}
               <ArrowRight className="ml-2" size={20} />
             </a>
           </Button>
@@ -171,13 +171,13 @@ export default function DiadicaContent() {
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-light mb-6 text-balance">
                 {"¿Qué es "}
                 <span className="font-semibold text-secondary">
-                  {"Diádica"}
+                  {"Diadica"}
                 </span>
                 {"?"}
               </h2>
               <p className="text-muted-foreground leading-relaxed mb-6">
                 {
-                  "Diádica es una aplicación que une la psicología cognitivo-conductual y la educación emocional para ofrecer actividades terapéuticas, pensadas para cada tipo de pareja y orientadas a reforzar las relaciones."
+                  "Diadica es una aplicación que une la psicología cognitivo-conductual y la educación emocional para ofrecer actividades terapéuticas, pensadas para cada tipo de pareja y orientadas a reforzar las relaciones."
                 }
               </p>
               <p className="text-muted-foreground leading-relaxed">
@@ -349,7 +349,7 @@ export default function DiadicaContent() {
               </p>
               <p>
                 {
-                  "Así nació Diádica, una aplicación pensada para ser el aliado diario de las relaciones. Decidí enfocarme en ayudar a las parejas a priorizar su tiempo de calidad, ya que la falta de momentos compartidos y la monotonía deterioran incluso las relaciones más fuertes."
+                  "Así nació Diadica, una aplicación pensada para ser el aliado diario de las relaciones. Decidí enfocarme en ayudar a las parejas a priorizar su tiempo de calidad, ya que la falta de momentos compartidos y la monotonía deterioran incluso las relaciones más fuertes."
                 }
               </p>
             </div>
@@ -357,7 +357,7 @@ export default function DiadicaContent() {
               <div className="w-12 h-12 rounded-full overflow-hidden relative">
                 <Image
                   src="/images/maria_alejandra_diadica.jpg"
-                  alt="Alejandra Ovalle Zuleta"
+                  alt="María Alejandra Ovalle, creadora de Diadica — app de psicología de pareja"
                   fill
                   className="object-cover"
                   style={{ objectPosition: "50% 10%" }}
@@ -369,7 +369,7 @@ export default function DiadicaContent() {
                   Alejandra Ovalle Zuleta
                 </p>
                 <p className="text-sm text-muted-foreground">
-                  {"CEO de Diádica"}
+                  {"CEO de Diadica"}
                 </p>
               </div>
             </div>
@@ -406,7 +406,7 @@ function DiadicaContactForm() {
     }
     setErrors({})
     const { name, phone, email, message } = result.data
-    const text = `Hola! Me interesa probar Diádica.\n\nMi nombre es ${name}.\nTeléfono: ${phone}\nEmail: ${email}\n\nMensaje: ${message}`
+    const text = `Hola! Me interesa probar Diadica.\n\nMi nombre es ${name}.\nTeléfono: ${phone}\nEmail: ${email}\n\nMensaje: ${message}`
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, "_blank")
   }
 
@@ -419,7 +419,7 @@ function DiadicaContactForm() {
             <span className="font-semibold text-secondary">se rompe</span>
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            {"Con Diádica, cuida tu relación desde hoy. Llena el formulario y me pondré en contacto contigo para que puedas probarla de forma gratuita."}
+            {"Con Diadica, cuida tu relación desde hoy. Llena el formulario y me pondré en contacto contigo para que puedas probarla de forma gratuita."}
           </p>
         </div>
 

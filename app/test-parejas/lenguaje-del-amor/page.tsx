@@ -6,9 +6,49 @@ import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "¿Cuál es mi lenguaje del amor? | Test Gratuito",
+  title: "Test Lenguaje del Amor — Descubre el Tuyo",
   description:
     "Identifica cómo expresas y necesitas recibir amor. Conocer tu lenguaje emocional transformará la forma en que te conectas con tu pareja.",
+  alternates: {
+    canonical: "https://mariaterapeuta.com/test-parejas/lenguaje-del-amor",
+  },
+  openGraph: {
+    title: "Test Lenguaje del Amor — Descubre el Tuyo",
+    description:
+      "Identifica cómo expresas y necesitas recibir amor. Conocer tu lenguaje emocional transformará la forma en que te conectas con tu pareja.",
+    url: "https://mariaterapeuta.com/test-parejas/lenguaje-del-amor",
+    type: "website",
+    locale: "es_ES",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Test Lenguaje del Amor — Descubre el Tuyo",
+    description:
+      "Identifica cómo expresas y necesitas recibir amor. Conocer tu lenguaje emocional transformará la forma en que te conectas con tu pareja.",
+  },
+}
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Inicio", item: "https://mariaterapeuta.com" },
+        { "@type": "ListItem", position: 2, name: "Test Parejas", item: "https://mariaterapeuta.com/test-parejas" },
+        { "@type": "ListItem", position: 3, name: "Test Lenguaje del Amor" },
+      ],
+    },
+    {
+      "@type": "Quiz",
+      name: "Test: ¿Cuál es mi lenguaje del amor para dar y recibir?",
+      description:
+        "Identifica cómo expresas y necesitas recibir amor. Conocer tu lenguaje emocional transformará la forma en que te conectas con tu pareja.",
+      url: "https://mariaterapeuta.com/test-parejas/lenguaje-del-amor",
+      educationalUse: "Self-assessment",
+      inLanguage: "es",
+    },
+  ],
 }
 
 export default function LenguajeDelAmorTestPage() {
@@ -16,6 +56,12 @@ export default function LenguajeDelAmorTestPage() {
     <>
       <Header />
       <main className="min-h-screen pt-28 pb-20 px-4">
+        <script
+          type="application/ld+json"
+          // JSON-LD structured data — static, trusted content, no user input
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: static JSON-LD
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <div className="container mx-auto max-w-4xl">
           <Link
             href="/test-parejas"

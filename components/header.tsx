@@ -29,9 +29,8 @@ export default function Header({ variant = "default" }: { variant?: "default" | 
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled || isMobileMenuOpen ? "bg-background/95 backdrop-blur-sm shadow-md" : "bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled || isMobileMenuOpen ? "bg-background/95 backdrop-blur-sm shadow-md" : "bg-transparent"
+        }`}
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
@@ -39,7 +38,7 @@ export default function Header({ variant = "default" }: { variant?: "default" | 
             <Link href="/diadica">
               <Image
                 src="/images/logo_diadica_completo.png"
-                alt="Logo Diádica"
+                alt="Logo Diadica"
                 width={1240}
                 height={390}
                 className="h-10 w-auto"
@@ -66,7 +65,7 @@ export default function Header({ variant = "default" }: { variant?: "default" | 
               Test Parejas
             </Link>
             <Link href="/diadica" className="text-sm font-medium hover:text-secondary transition-colors">
-              {"Diádica"}
+              {"Diadica"}
             </Link>
             <Link href="/blog" className="text-sm font-medium hover:text-secondary transition-colors">
               Blog
@@ -105,7 +104,7 @@ export default function Header({ variant = "default" }: { variant?: "default" | 
                 className="text-sm font-medium hover:text-secondary transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                {"Diádica"}
+                {"Diadica"}
               </Link>
               <Link
                 href="/blog"

@@ -7,9 +7,45 @@ import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 
 export const metadata: Metadata = {
-  title: "Test Gratuitos para Parejas | Terapia y Sexología",
+  title: "Test Gratuitos para Parejas",
   description:
     "Descubre el estado de tu relación con nuestros test gratuitos para parejas. Cuestionarios diseñados para ayudarte a comprender y mejorar tu vínculo.",
+  alternates: {
+    canonical: "https://mariaterapeuta.com/test-parejas",
+  },
+  openGraph: {
+    title: "Test Gratuitos para Parejas | Terapia y Sexología",
+    description:
+      "Descubre el estado de tu relación con nuestros test gratuitos para parejas. Cuestionarios diseñados para ayudarte a comprender y mejorar tu vínculo.",
+    url: "https://mariaterapeuta.com/test-parejas",
+    type: "website",
+    locale: "es_ES",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Test Gratuitos para Parejas | Terapia y Sexología",
+    description:
+      "Descubre el estado de tu relación con nuestros test gratuitos para parejas. Cuestionarios diseñados para ayudarte a comprender y mejorar tu vínculo.",
+  },
+}
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Inicio",
+      item: "https://mariaterapeuta.com",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Test Parejas",
+      item: "https://mariaterapeuta.com/test-parejas",
+    },
+  ],
 }
 
 export default function TestParejasPage() {
@@ -17,6 +53,12 @@ export default function TestParejasPage() {
     <>
       <Header />
       <main className="min-h-screen pt-32 pb-20 px-4">
+        <script
+          type="application/ld+json"
+          // JSON-LD structured data — static, trusted content, no user input
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: static JSON-LD
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <div className="container mx-auto max-w-4xl">
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-light leading-tight text-balance mb-6">

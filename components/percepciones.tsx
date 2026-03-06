@@ -9,7 +9,7 @@ export default function Percepciones() {
           <div className="w-full md:w-48 lg:w-56 flex-shrink-0 relative min-h-[200px]">
             <Image
               src="/images/percepciones_1_sexo.png"
-              alt="Ilustración sobre sexología"
+              alt="El sexo como autoconocimiento y aceptación — ilustración de sexología"
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 224px"
@@ -36,7 +36,7 @@ export default function Percepciones() {
           <div className="w-full md:w-48 lg:w-56 flex-shrink-0 relative min-h-[200px]">
             <Image
               src="/images/percepciones_2_parejas.png"
-              alt="Ilustración sobre terapia de pareja"
+              alt="La terapia de pareja como herramienta preventiva — ilustración"
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 224px"
