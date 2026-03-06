@@ -137,7 +137,7 @@ const jsonLd = {
         "@type": "ContactPoint",
         contactType: "customer support",
         telephone: "+34 666 90 59 70",
-availableLanguage: "Spanish",
+        availableLanguage: "Spanish",
       },
       aggregateRating: {
         "@type": "AggregateRating",

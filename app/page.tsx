@@ -7,6 +7,7 @@ import About from "@/components/about"
 import Testimonials from "@/components/testimonials"
 import Pricing from "@/components/pricing"
 import Location from "@/components/location"
+import FAQ from "@/components/faq"
 import ContactForm from "@/components/contact-form"
 import Footer from "@/components/footer"
 import WhatsAppButton from "@/components/whatsapp-button"
@@ -78,6 +79,7 @@ export default function Home() {
         <Testimonials />
         <Pricing />
         <Location />
+        <FAQ />
         <ContactForm />
       </main>
       <Footer />
