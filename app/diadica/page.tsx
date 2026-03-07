@@ -35,7 +35,7 @@ const jsonLd = {
     "Aplicación que combina psicología cognitivo-conductual y tecnología para ofrecer actividades terapéuticas personalizadas para parejas.",
   url: "https://www.diadica.com/",
   applicationCategory: "HealthApplication",
-  operatingSystem: "Web, iOS, Android",
+  operatingSystem: "Web",
   offers: {
     "@type": "Offer",
     price: "0",
