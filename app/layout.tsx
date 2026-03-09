@@ -32,6 +32,12 @@ export const metadata: Metadata = {
     "terapia de pareja online, terapeuta online España, sexóloga online, terapia sexual online, terapeuta Madrid, terapia de pareja, sexología, terapeuta sexual, terapia sexual, terapia cognitivo-conductual, relaciones de pareja, sexóloga, terapia individual",
   alternates: {
     canonical: "https://mariaterapeuta.com",
+    languages: {
+      "es-ES": "https://mariaterapeuta.com",
+      "es-CO": "https://mariaterapeuta.com",
+      "es-MX": "https://mariaterapeuta.com",
+      "es-AR": "https://mariaterapeuta.com",
+    },
   },
   openGraph: {
     title: "María Alejandra Ovalle - Terapeuta en Sexología y Terapia de Pareja",
@@ -138,12 +144,6 @@ const jsonLd = {
         contactType: "customer support",
         telephone: "+34 666 90 59 70",
         availableLanguage: "Spanish",
-      },
-      aggregateRating: {
-        "@type": "AggregateRating",
-        ratingValue: "5",
-        reviewCount: "5",
-        bestRating: "5",
       },
     },
     {
