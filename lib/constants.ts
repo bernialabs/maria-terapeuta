@@ -5,7 +5,7 @@ export function whatsappUrl(message: string): string {
 }
 
 export const SOCIAL_LINKS = {
-  instagram: "https://www.instagram.com/diadicaoficial",
-  tiktok: "https://www.tiktok.com/@diadicaoficial",
+  instagram: "https://www.instagram.com/soymariaterapeuta",
+  tiktok: "https://www.tiktok.com/@soymariaterapeuta",
   linkedin: "https://www.linkedin.com/in/ma-alejandra-ovalle-zuleta-8135a2124",
 }

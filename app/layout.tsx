@@ -102,8 +102,8 @@ const jsonLd = {
       ],
       availableLanguage: "Spanish",
       sameAs: [
-        "https://www.instagram.com/diadicaoficial",
-        "https://www.tiktok.com/@diadicaoficial",
+        "https://www.instagram.com/soymariaterapeuta",
+        "https://www.tiktok.com/@soymariaterapeuta",
         "https://www.linkedin.com/in/ma-alejandra-ovalle-zuleta-8135a2124",
       ],
       hasOfferCatalog: {
@@ -164,9 +164,9 @@ const jsonLd = {
         },
       },
       sameAs: [
-        "https://www.instagram.com/diadicaoficial",
+        "https://www.instagram.com/soymariaterapeuta",
         "https://www.linkedin.com/in/ma-alejandra-ovalle-zuleta-8135a2124",
-        "https://www.tiktok.com/@diadicaoficial",
+        "https://www.tiktok.com/@soymariaterapeuta",
       ],
     },
   ],
