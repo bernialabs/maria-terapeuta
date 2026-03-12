@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Blog | Terapia y Sexología",
   description:
     "Artículos y recursos sobre terapia de pareja, sexología y bienestar emocional.",
+  robots: { index: false, follow: true },
 }
 
 export default function BlogPage() {

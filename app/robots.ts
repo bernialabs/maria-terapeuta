@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/api/", "/blog"],
+      disallow: ["/api/"],
     },
     sitemap: "https://mariaterapeuta.com/sitemap.xml",
   }
