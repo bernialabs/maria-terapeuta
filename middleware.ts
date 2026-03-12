@@ -29,12 +29,17 @@ const ALLOWED_EXACT = new Set([
 ])
 
 export function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl
+  const raw = request.nextUrl.pathname
+  // Normalize trailing slash so /diadica/ matches /diadica in VALID_PATHS.
+  // Keep "/" as-is to avoid reducing it to an empty string.
+  const pathname = raw.length > 1 ? raw.replace(/\/$/, "") : raw
 
   if (
     VALID_PATHS.has(pathname) ||
     ALLOWED_EXACT.has(pathname) ||
-    ALLOWED_PREFIXES.some((prefix) => pathname.startsWith(prefix))
+    ALLOWED_PREFIXES.some((prefix) => pathname.startsWith(prefix)) ||
+    // Next.js App Router serves opengraph-image.tsx as a route for each page.
+    pathname.endsWith("/opengraph-image")
   ) {
     return NextResponse.next()
   }
