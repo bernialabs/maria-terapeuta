@@ -44,7 +44,14 @@ export function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
-  return new NextResponse(null, { status: 410 })
+  // Return 410 Gone to crawlers (faster deindex signal).
+  // Let humans through to Next.js, which renders the 404 page.
+  const ua = request.headers.get("user-agent") ?? ""
+  const isBot = /bot|crawl|spider|google|bing|yandex|baidu|slurp/i.test(ua)
+  if (isBot) {
+    return new NextResponse(null, { status: 410 })
+  }
+  return NextResponse.next()
 }
 
 export const config = {

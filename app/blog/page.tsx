@@ -21,7 +21,7 @@ export default function BlogPage() {
               Blog
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-              {"Contenido próximamente disponible."}
+              Contenido próximamente disponible.
             </p>
           </div>
         </div>
