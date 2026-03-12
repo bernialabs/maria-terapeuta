@@ -34,3 +34,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# GSC export script secrets & output
+scripts/credentials.json
+scripts/token.json
+scripts/output/
