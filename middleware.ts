@@ -28,6 +28,8 @@ const ALLOWED_EXACT = new Set([
   "/spam-cleanup-sitemap.xml",
 ])
 
+const BOT_UA_RE = /bot|crawl|spider|google|bing|yandex|baidu|slurp/i
+
 export function middleware(request: NextRequest) {
   const raw = request.nextUrl.pathname
   // Normalize trailing slash so /diadica/ matches /diadica in VALID_PATHS.
@@ -47,7 +49,7 @@ export function middleware(request: NextRequest) {
   // Return 410 Gone to crawlers (faster deindex signal).
   // Let humans through to Next.js, which renders the 404 page.
   const ua = request.headers.get("user-agent") ?? ""
-  const isBot = /bot|crawl|spider|google|bing|yandex|baidu|slurp/i.test(ua)
+  const isBot = BOT_UA_RE.test(ua)
   if (isBot) {
     return new NextResponse(null, { status: 410 })
   }
