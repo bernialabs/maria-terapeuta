@@ -4,23 +4,16 @@
 //
 // Hojas requeridas:
 //   "Respuestas recodificadas": fila 1 = cabecera, filas 2+ = datos
-//     Col 53 (0-based): Conexión relacional → nivel texto
-//     Col 54: Conexión Sexual → nivel texto
-//     Col 55: Gestión emocional → nivel texto
-//     Col 56: Cercanía emocional → nivel texto
-//     Col 57: Atención activa → nivel texto
-//     Col 58: Percepción del tiempo → nivel texto
-//     Col 59: Nivel de monotonía (ej. "Bajo 🥰", "Medio 😳", etc.)
+//     Cols AU–AZ (0-based 46–51): Puntuaciones numéricas de los 6 factores (máx. 42 c/u)
+//     Col  BA    (0-based 52):    Nivel de afinidad total (máx. 238)
+//     Cols BB–BG (0-based 53–58): Niveles texto de los 6 factores
+//     Col  BH    (0-based 59):    Nivel de afinidad texto (ej. "Bajo 🥰", "Medio 😳", etc.)
 //
 //   "Interpretaciones": col A = clave, col B = texto
-//     Filas 1–4:   Header "Conexión relacional" + 3 niveles
-//     Filas 6–9:   Header "Conexión sexual" + 3 niveles
-//     Filas 11–14: Header "Gestión emocional" + 3 niveles
-//     Filas 16–19: Header "Cercanía emocional" + 3 niveles
-//     Filas 21–24: Header "Atención activa" + 3 niveles
-//     Filas 26–29: Header "Percepción del tiempo" + 3 niveles
-//     Filas 31–35: Header "Nivel de monotonía" + 4 niveles
-//     Filas 37–41: Header "Recomendaciones" + 4 niveles
+//     Filas de header (col B vacía) definen el grupo; filas siguientes tienen nivel y texto
+//     Grupos esperados: Conexión relacional, Conexión sexual, Gestión emocional,
+//                       Cercanía emocional, Atención activa, Percepción del tiempo,
+//                       Nivel de afinidad, Cierre
 //
 //   Datos personales — primera pestaña del libro (form responses):
 //     Col 35 (0-based): Nombre
@@ -33,9 +26,11 @@
 // ------------------------------------------------------------
 var NOMBRE_HOJA_RECOD   = "Respuestas recodificadas";
 var NOMBRE_HOJA_INTERP  = "Interpretaciones";
-var COL_FACTOR_INICIO   = 53;  // 0-based, Conexión relacional
+var COL_SCORE_INICIO    = 46;  // 0-based, AU — puntuación numérica Conexión relacional
+var COL_FACTOR_INICIO   = 53;  // 0-based, BB — nivel texto Conexión relacional
 var NUM_FACTORES        = 6;
-// COL_NIVEL_MONOTONIA = COL_FACTOR_INICIO + NUM_FACTORES = 59 (0-based)
+var MAX_PUNTAJE_FACTOR  = 42;
+// COL_NIVEL_AFINIDAD = COL_FACTOR_INICIO + NUM_FACTORES = 59 (0-based, BH)
 var NOMBRES_FACTORES = [
   "Conexión relacional",
   "Conexión Sexual",
@@ -64,17 +59,6 @@ function getEstiloNivel(nivel) {
   if (nivel.startsWith("Medio"))         return { bg: "#FFF3CD", text: "#856404", border: "#FFE69C", bar: "#FFC107" };
   if (nivel.startsWith("Alto"))          return { bg: "#F8D7DA", text: "#842029", border: "#F5C2C7", bar: "#DC3545" };
   return { bg: "#E2E3E5", text: "#383D41", border: "#D6D8DB", bar: "#6C757D" };
-}
-
-// ------------------------------------------------------------
-// PORCENTAJE DE BARRA según nivel de factor
-// (Los niveles de monotonía global no llevan barra)
-// ------------------------------------------------------------
-function getPorcentajeBarra(nivel) {
-  if (nivel.startsWith("Estable"))       return 100;
-  if (nivel.startsWith("En desarrollo")) return 55;
-  if (nivel.startsWith("Por mejorar"))   return 20;
-  return 50;
 }
 
 // ------------------------------------------------------------
@@ -143,41 +127,50 @@ function buscarInterpretacion(lookup, factor, nivel) {
 }
 
 // ------------------------------------------------------------
-// LEER NIVELES DE UNA FILA de "Respuestas recodificadas"
+// LEER NIVELES Y PUNTUACIONES DE UNA FILA de "Respuestas recodificadas"
 // numFila: número de fila 1-based (convención GAS)
-// Devuelve { factores: [{nombre, nivel}, …], nivelMonotonia }
+// Devuelve {
+//   factores: [{ nombre, nivel, puntaje }, …],
+//   nivelAfinidad,   // texto, ej. "Medio 😳"
+//   puntajeTotal     // numérico, col BA
+// }
 // ------------------------------------------------------------
 function leerNivelesFila(hojaRecod, numFila) {
-  // 7 columnas: 6 factores + nivel de monotonía global
-  var rango = hojaRecod.getRange(numFila, COL_FACTOR_INICIO + 1, 1, NUM_FACTORES + 1);
+  // Leer en una sola llamada: cols AU–BH (14 columnas contiguas)
+  // AU–BA (índices 0–6): puntajes numéricos (6 factores + total)
+  // BB–BH (índices 7–13): niveles texto (6 factores + nivel de afinidad)
+  var numColumnas = (NUM_FACTORES + 1) * 2; // 14
+  var rango = hojaRecod.getRange(numFila, COL_SCORE_INICIO + 1, 1, numColumnas);
   var valores = rango.getValues()[0];
 
   var factores = [];
   for (var i = 0; i < NUM_FACTORES; i++) {
     factores.push({
-      nombre: NOMBRES_FACTORES[i],
-      nivel:  String(valores[i]).trim()
+      nombre:  NOMBRES_FACTORES[i],
+      nivel:   String(valores[NUM_FACTORES + 1 + i]).trim(),
+      puntaje: parseFloat(valores[i]) || 0
     });
   }
 
   return {
-    factores:       factores,
-    nivelMonotonia: String(valores[NUM_FACTORES]).trim()
+    factores:      factores,
+    nivelAfinidad: String(valores[NUM_FACTORES + 1 + NUM_FACTORES]).trim(),
+    puntajeTotal:  parseFloat(valores[NUM_FACTORES]) || 0
   };
 }
 
 // ------------------------------------------------------------
 // GENERACIÓN DEL HTML DEL CORREO
 // ------------------------------------------------------------
-function generarHTMLCorreo(nombre, duracion, factores, nivelMonotonia, interpretaciones) {
-  var estiloGeneral = getEstiloNivel(nivelMonotonia);
+function generarHTMLCorreo(nombre, duracion, factores, nivelAfinidad, interpretaciones) {
+  var estiloGeneral = getEstiloNivel(nivelAfinidad);
 
   // --- Tarjetas de factores (6) ---
   var tarjetasFactores = "";
   for (var i = 0; i < factores.length; i++) {
     var f = factores[i];
     var estilo = getEstiloNivel(f.nivel);
-    var porcentajeBarra = getPorcentajeBarra(f.nivel);
+    var porcentajeBarra = Math.max(2, Math.round(Math.min(f.puntaje, MAX_PUNTAJE_FACTOR) / MAX_PUNTAJE_FACTOR * 100));
     var mensaje = buscarInterpretacion(interpretaciones, f.nombre, f.nivel);
 
     tarjetasFactores += [
@@ -209,9 +202,9 @@ function generarHTMLCorreo(nombre, duracion, factores, nivelMonotonia, interpret
     ].join('');
   }
 
-  // --- Sección Recomendación ---
-  var textoRecomendacion = buscarInterpretacion(interpretaciones, "Recomendaciones", nivelMonotonia);
-  var seccionRecomendacion = [
+  // --- Sección Conclusión (dinámica según nivel de afinidad) ---
+  var textoConclusion = buscarInterpretacion(interpretaciones, "Nivel de afinidad", nivelAfinidad);
+  var seccionConclusion = [
     '<div style="',
       'background-color:#FFF3F1;',
       'border:2px solid #FA523C;',
@@ -220,13 +213,16 @@ function generarHTMLCorreo(nombre, duracion, factores, nivelMonotonia, interpret
       'margin-top:24px;',
     '">',
       '<p style="margin:0 0 8px;font-size:13px;font-weight:700;color:#FA523C;text-transform:uppercase;letter-spacing:0.05em;">',
-        'Recomendación',
+        'Conclusión',
       '</p>',
       '<p style="font-size:14px;color:#3D2E2A;line-height:1.6;margin:0;">',
-        textoRecomendacion,
+        textoConclusion,
       '</p>',
     '</div>',
   ].join('');
+
+  // --- Texto de cierre dinámico según nivel de afinidad ---
+  var textoCierre = buscarInterpretacion(interpretaciones, "Cierre", nivelAfinidad);
 
   return [
     '<!DOCTYPE html>',
@@ -251,7 +247,7 @@ function generarHTMLCorreo(nombre, duracion, factores, nivelMonotonia, interpret
       '">',
         '<img src="https://mariaterapeuta.com/images/logo_maria_terapeuta.png"',
           ' alt="María Terapeuta" width="140"',
-          ' style="display:block;margin:0 auto 16px;max-width:140px;">',
+          ' style="display:block;margin:0 auto 20px;max-width:140px;">',
         '<h1 style="margin:0;color:#ffffff;font-size:22px;font-weight:700;line-height:1.3;">',
           'Resultados de tu Test de Monotonía',
         '</h1>',
@@ -269,7 +265,7 @@ function generarHTMLCorreo(nombre, duracion, factores, nivelMonotonia, interpret
           'y a continuación encontrarás un análisis personalizado de seis áreas clave de tu relación.',
         '</p>',
 
-        // Badge nivel de monotonía
+        // Badge nivel de afinidad
         '<div style="',
           'background-color:', estiloGeneral.bg, ';',
           'border:1px solid ', estiloGeneral.border, ';',
@@ -280,10 +276,10 @@ function generarHTMLCorreo(nombre, duracion, factores, nivelMonotonia, interpret
         '">',
           '<p style="margin:0 0 6px;font-size:12px;color:', estiloGeneral.text, ';',
             'text-transform:uppercase;letter-spacing:0.05em;font-weight:700;">',
-            'Nivel de monotonía',
+            'Nivel de afinidad',
           '</p>',
           '<p style="margin:0;font-size:24px;font-weight:700;color:', estiloGeneral.text, ';">',
-            nivelMonotonia,
+            nivelAfinidad,
           '</p>',
         '</div>',
 
@@ -293,21 +289,15 @@ function generarHTMLCorreo(nombre, duracion, factores, nivelMonotonia, interpret
         '</h2>',
         tarjetasFactores,
 
-        // Sección Recomendación
-        seccionRecomendacion,
+        // Sección Conclusión
+        seccionConclusion,
 
         // Separador
         '<hr style="border:none;border-top:1px solid #E8D9C8;margin:28px 0;">',
 
-        // Reflexión + CTA
+        // Cierre dinámico
         '<p style="font-size:15px;color:#3D2E2A;line-height:1.6;">',
-          'La monotonía no aparece de un día para otro; suele ser el resultado de pequeños momentos de ',
-          'desconexión que se van acumulando con el tiempo. La buena noticia es que las relaciones también ',
-          'pueden transformarse cuando se les dedica espacio, atención y nuevas herramientas.',
-        '</p>',
-        '<p style="font-size:15px;color:#3D2E2A;line-height:1.6;">',
-          'Si quieres empezar a fortalecerla de forma consciente, la terapia de pareja puede ser un ',
-          'espacio seguro para hacerlo. Puedes reservar una sesión conmigo aquí.',
+          textoCierre,
         '</p>',
 
         // Botón WhatsApp
@@ -364,8 +354,8 @@ function generarHTMLCorreo(nombre, duracion, factores, nivelMonotonia, interpret
 // ------------------------------------------------------------
 // ENVÍO DEL CORREO
 // ------------------------------------------------------------
-function enviarCorreo(email, nombre, duracion, factores, nivelMonotonia, interpretaciones) {
-  var htmlBody = generarHTMLCorreo(nombre, duracion, factores, nivelMonotonia, interpretaciones);
+function enviarCorreo(email, nombre, duracion, factores, nivelAfinidad, interpretaciones) {
+  var htmlBody = generarHTMLCorreo(nombre, duracion, factores, nivelAfinidad, interpretaciones);
 
   MailApp.sendEmail({
     to: email,
@@ -380,9 +370,11 @@ function enviarCorreo(email, nombre, duracion, factores, nivelMonotonia, interpr
 // Lee datos personales de la primera pestaña (form responses):
 //   Col 35: Nombre, Col 36: Tiempo en relación, Col 37: Email
 //
-// Lee niveles pre-calculados de "Respuestas recodificadas":
-//   Cols 53–58: niveles de los 6 factores
-//   Col 59: nivel global de monotonía
+// Lee puntuaciones numéricas de "Respuestas recodificadas":
+//   Cols AU–AZ (0-based 46–51): puntuación de cada factor (máx. 42)
+//   Col  BA    (0-based 52): nivel de afinidad total (máx. 238)
+//   Cols BB–BG (0-based 53–58): nivel texto de cada factor
+//   Col  BH    (0-based 59): nivel de afinidad texto
 //
 // Lee textos de interpretación de "Interpretaciones".
 // ------------------------------------------------------------
@@ -399,6 +391,10 @@ function enviarCorreoDesdeGoogleSheets() {
   }
 
   var interpretaciones = leerInterpretaciones(ss);
+  if (Object.keys(interpretaciones).length === 0) {
+    Logger.log("ERROR: La pestaña '" + NOMBRE_HOJA_INTERP + "' está vacía o no se pudo leer. Se cancela el envío.");
+    return;
+  }
 
   var datos = hojaRespuestas.getDataRange().getValues();
 
@@ -409,25 +405,33 @@ function enviarCorreoDesdeGoogleSheets() {
     var nombre   = String(d[COL_NOMBRE]).trim();
     var duracion = String(d[COL_DURACION]).trim();
 
-    if (!email || email === "") {
+    if (!email) {
       Logger.log("Fila " + (fila + 1) + " sin email, se omite.");
+      continue;
+    }
+    if (!nombre) {
+      Logger.log("Fila " + (fila + 1) + " sin nombre, se omite.");
       continue;
     }
 
     var numFilaGAS = fila + 1; // índice 0-based → fila GAS 1-based
     var resultado = leerNivelesFila(hojaRecod, numFilaGAS);
 
-    if (!resultado.nivelMonotonia) {
-      Logger.log("Fila " + numFilaGAS + " sin nivel de monotonía calculado, se omite.");
+    if (!resultado.nivelAfinidad) {
+      Logger.log("Fila " + numFilaGAS + " sin nivel de afinidad calculado, se omite.");
       continue;
     }
 
-    enviarCorreo(email, nombre, duracion, resultado.factores, resultado.nivelMonotonia, interpretaciones);
-
-    Logger.log(
-      "Correo enviado → " + email +
-      " (" + nombre + ")" +
-      " | Monotonía: " + resultado.nivelMonotonia
-    );
+    try {
+      enviarCorreo(email, nombre, duracion, resultado.factores, resultado.nivelAfinidad, interpretaciones);
+      Logger.log(
+        "Correo enviado → " + email +
+        " (" + nombre + ")" +
+        " | Afinidad: " + resultado.nivelAfinidad +
+        " (" + resultado.puntajeTotal + "/238)"
+      );
+    } catch (e) {
+      Logger.log("ERROR al enviar a " + email + " (fila " + numFilaGAS + "): " + e.message);
+    }
   }
 }
