@@ -25,10 +25,10 @@
 //   Pestaña "Interpretación"
 //   A1:B6   → Significado RECIBIR  (fila 1 = header, filas 2–6 = lenguajes)
 //   A8:B13  → Advertencia RECIBIR
-//   A15:B20 → Salvedad RECIBIR
+//   A15:B20 → Conclusión RECIBIR
 //   A22:B27 → Significado DAR
 //   A29:B34 → Advertencia DAR
-//   A36:B41 → Salvedad DAR
+//   A36:B41 → Conclusión DAR
 //   Columna A = clave del lenguaje (ej. "Regalos_RECIBIR"), Columna B = texto
 // ============================================================
 
@@ -214,10 +214,10 @@ function leerInterpretaciones(ss) {
 
   // A1:B6   → Significado RECIBIR (fila 1 = header, filas 2–6 = datos)
   // A8:B13  → Advertencia RECIBIR
-  // A15:B20 → Salvedad RECIBIR
+  // A15:B20 → Conclusión RECIBIR
   // A22:B27 → Significado DAR
   // A29:B34 → Advertencia DAR
-  // A36:B41 → Salvedad DAR
+  // A36:B41 → Conclusión DAR
   var bloques = [
     { dim: "recibir", tipo: "significado", filaInicio: 2,  filaFin: 6  },
     { dim: "recibir", tipo: "advertencia", filaInicio: 9,  filaFin: 13 },
