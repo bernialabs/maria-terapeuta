@@ -578,6 +578,36 @@ function enviarCorreo(email, nombre, datosRecibir, datosDar, interpRecibir, inte
 }
 
 // ------------------------------------------------------------
+// ENVÍO MANUAL — equivalente a enviarCorreoDesdeGoogleSheets en monotonía
+// Ejecutar manualmente desde el editor de Apps Script para probar
+// sin necesidad de rellenar el formulario.
+//
+// Por defecto procesa SOLO la última fila (más reciente).
+// Para procesar todas las filas, cambiar SOLO_ULTIMA_FILA a false.
+// ------------------------------------------------------------
+function enviarCorreoDesdeGoogleSheets() {
+  var SOLO_ULTIMA_FILA = true;
+
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var hojaRespuestas = ss.getSheetByName("Respuestas de formulario 1") || ss.getSheets()[0];
+
+  var ultimaFila = hojaRespuestas.getLastRow();
+  var filaInicio = SOLO_ULTIMA_FILA ? ultimaFila : 2; // fila 1 = cabecera
+
+  Logger.log("Iniciando envío manual. Filas " + filaInicio + " a " + ultimaFila + ".");
+
+  for (var fila = filaInicio; fila <= ultimaFila; fila++) {
+    try {
+      procesarFila(fila);
+    } catch (e) {
+      Logger.log("ERROR en fila " + fila + ": " + e.message);
+    }
+  }
+
+  Logger.log("Envío manual completado.");
+}
+
+// ------------------------------------------------------------
 // DIAGNÓSTICO — ejecutar manualmente para verificar columnas
 // Imprime en el log los valores clave de la última fila de datos.
 // ------------------------------------------------------------
