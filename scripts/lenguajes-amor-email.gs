@@ -18,7 +18,9 @@
 //   Pestaña "recodificación"
 //   Col 140–144 (EK–EO): Puntuaciones RECIBIR (5 lenguajes, %)
 //   Col 145–149 (EP–ET): Puntuaciones DAR (5 lenguajes, %)
-//   Los nombres de los lenguajes se leen de la fila de cabecera.
+//   Los headers de EK–EO son las claves de lookup para Interpretación RECIBIR
+//   Los headers de EP–ET son las claves de lookup para Interpretación DAR
+//   Nota: "Regalos_RECIBIR" en EK y "Regalos_DAR" en EP → claves distintas en Interpretación
 //
 //   Pestaña "Interpretación"
 //   A1:B6   → Significado RECIBIR  (fila 1 = header, filas 2–6 = lenguajes)
@@ -27,7 +29,7 @@
 //   A22:B27 → Significado DAR
 //   A29:B34 → Advertencia DAR
 //   A36:B41 → Salvedad DAR
-//   Columna A = nombre del lenguaje, Columna B = texto
+//   Columna A = clave del lenguaje (ej. "Regalos_RECIBIR"), Columna B = texto
 // ============================================================
 
 // Índices de columna (0-based) en "recodificación"
@@ -35,9 +37,15 @@ var COL_RECIBIR_INICIO = 140; // EK
 var COL_DAR_INICIO     = 145; // EP
 var NUM_LENGUAJES      = 5;
 
+// Máximo porcentaje posible por lenguaje (escala de la gráfica)
+var MAX_PCT_LENGUAJE = 33;
+
 // Índices de columna (0-based) en "Respuestas de formulario 1"
 var COL_NOMBRE = 82; // CE
 var COL_EMAIL  = 83; // CF
+
+// Alias para normalizar nombres de display (no afecta claves de lookup)
+var ALIAS_DISPLAY = { "Dar regalos": "Regalos" };
 
 // ------------------------------------------------------------
 // INSTALAR TRIGGER (ejecutar UNA sola vez manualmente)
@@ -107,14 +115,24 @@ function procesarFila(numFila) {
 
   // Cabecera de nombres (fila 1, índice 0)
   var cabecera = hojaRecod.getRange(1, 1, 1, COL_DAR_INICIO + NUM_LENGUAJES).getValues()[0];
-  var nombresLenguajes = [];
+
+  // Construir tres arrays paralelos:
+  //   nombresDisplay     → nombre visible en gráfica y correo (sin sufijo, con alias)
+  //   lookupKeysRecibir  → clave real en Interpretación para dimensión RECIBIR (ej. "Regalos_RECIBIR")
+  //   lookupKeysDar      → clave real en Interpretación para dimensión DAR     (ej. "Regalos_DAR")
+  var nombresDisplay    = [];
+  var lookupKeysRecibir = [];
+  var lookupKeysDar     = [];
+
   for (var i = 0; i < NUM_LENGUAJES; i++) {
-    var nombreBruto = String(cabecera[COL_RECIBIR_INICIO + i]).trim();
-    // Eliminar sufijos "_RECIBIR" / "_DAR" si los tiene la cabecera
-    var nombreLimpio = nombreBruto.replace(/_(RECIBIR|DAR)$/i, "").trim();
-    // Normalizar nombres que difieren entre recodificación e Interpretación
-    var ALIAS = { "Dar regalos": "Regalos" };
-    nombresLenguajes.push(ALIAS[nombreLimpio] || nombreLimpio);
+    var rawRecibir = String(cabecera[COL_RECIBIR_INICIO + i]).trim();
+    var rawDar     = String(cabecera[COL_DAR_INICIO     + i]).trim();
+    lookupKeysRecibir.push(rawRecibir);
+    lookupKeysDar.push(rawDar);
+
+    // Nombre de display: eliminar sufijo _RECIBIR/_DAR y aplicar alias
+    var displayName = rawRecibir.replace(/_(RECIBIR|DAR)$/i, "").trim();
+    nombresDisplay.push(ALIAS_DISPLAY[displayName] || displayName);
   }
 
   // Puntuaciones de la fila actual
@@ -156,13 +174,13 @@ function procesarFila(numFila) {
   // Leer interpretaciones
   var lookup = leerInterpretaciones(ss);
 
-  // Ordenar por puntaje
-  var datosRecibir = ordenarPorPuntaje(nombresLenguajes, puntajesRecibir);
-  var datosDar     = ordenarPorPuntaje(nombresLenguajes, puntajesDar);
+  // Ordenar por puntaje (cada ítem lleva su clave de lookup)
+  var datosRecibir = ordenarPorPuntaje(nombresDisplay, lookupKeysRecibir, puntajesRecibir);
+  var datosDar     = ordenarPorPuntaje(nombresDisplay, lookupKeysDar,     puntajesDar);
 
-  // Construir bloques de interpretación
-  var interpRecibir = construirInterpretacion(lookup, datosRecibir[0].nombre, "recibir");
-  var interpDar     = construirInterpretacion(lookup, datosDar[0].nombre,     "dar");
+  // Construir bloques de interpretación usando la clave de lookup correcta
+  var interpRecibir = construirInterpretacion(lookup, datosRecibir[0].lookupKey, "recibir");
+  var interpDar     = construirInterpretacion(lookup, datosDar[0].lookupKey,     "dar");
 
   // Enviar correo
   enviarCorreo(email, nombre, datosRecibir, datosDar, interpRecibir, interpDar);
@@ -178,7 +196,7 @@ function procesarFila(numFila) {
 // ------------------------------------------------------------
 // LEER INTERPRETACIONES de la pestaña "Interpretación"
 // Devuelve objeto lookup:
-//   lookup[dimension][tipo][nombreLenguaje] = texto
+//   lookup[dimension][tipo][clavelenguaje] = texto
 //   dimension: "recibir" | "dar"
 //   tipo: "significado" | "advertencia" | "salvedad"
 // ------------------------------------------------------------
@@ -194,13 +212,12 @@ function leerInterpretaciones(ss) {
     dar:     { significado: {}, advertencia: {}, salvedad: {} }
   };
 
-  // A1:B6  → Significado RECIBIR (fila 1 = header, filas 2–6 = datos)
-  // A8:B13 → Advertencia RECIBIR
+  // A1:B6   → Significado RECIBIR (fila 1 = header, filas 2–6 = datos)
+  // A8:B13  → Advertencia RECIBIR
   // A15:B20 → Salvedad RECIBIR
   // A22:B27 → Significado DAR
   // A29:B34 → Advertencia DAR
   // A36:B41 → Salvedad DAR
-
   var bloques = [
     { dim: "recibir", tipo: "significado", filaInicio: 2,  filaFin: 6  },
     { dim: "recibir", tipo: "advertencia", filaInicio: 9,  filaFin: 13 },
@@ -243,6 +260,7 @@ function buscarInterpretacion(lookup, lenguaje, tipo, dimension) {
 
 // ------------------------------------------------------------
 // CONSTRUIR BLOQUE DE INTERPRETACIÓN para el lenguaje principal
+// lenguajePrincipal = clave de lookup (ej. "Regalos_RECIBIR")
 // ------------------------------------------------------------
 function construirInterpretacion(lookup, lenguajePrincipal, dimension) {
   return {
@@ -254,12 +272,12 @@ function construirInterpretacion(lookup, lenguajePrincipal, dimension) {
 
 // ------------------------------------------------------------
 // ORDENAR LENGUAJES DE MAYOR A MENOR PUNTAJE
-// Devuelve [{nombre, puntaje}, …]
+// Devuelve [{ nombre (display), lookupKey, puntaje }, …]
 // ------------------------------------------------------------
-function ordenarPorPuntaje(nombres, puntajes) {
+function ordenarPorPuntaje(nombres, lookupKeys, puntajes) {
   var pares = [];
   for (var i = 0; i < nombres.length; i++) {
-    pares.push({ nombre: nombres[i], puntaje: puntajes[i] });
+    pares.push({ nombre: nombres[i], lookupKey: lookupKeys[i], puntaje: puntajes[i] });
   }
   pares.sort(function(a, b) { return b.puntaje - a.puntaje; });
   return pares;
@@ -268,6 +286,7 @@ function ordenarPorPuntaje(nombres, puntajes) {
 // ------------------------------------------------------------
 // GRÁFICA DE BARRAS VERTICALES (email-safe, table-based)
 // Altura máxima: 120px
+// Escala: MAX_PCT_LENGUAJE (33%) = altura máxima
 // Barras ordenadas de mayor a menor (recibe datos ya ordenados)
 // ------------------------------------------------------------
 function generarGraficaHTML(datos) {
@@ -295,7 +314,8 @@ function generarGraficaHTML(datos) {
   for (var i = 0; i < datos.length; i++) {
     var d = datos[i];
     var pct = Math.round(d.puntaje);
-    var altBarra  = Math.round((pct / 100) * alturaMax);
+    // Escalar al máximo de 33%: barra llena = MAX_PCT_LENGUAJE
+    var altBarra = Math.round(Math.min(d.puntaje, MAX_PCT_LENGUAJE) / MAX_PCT_LENGUAJE * alturaMax);
     var altVacio  = alturaMax - altBarra;
     var esPrincipal = (i === 0);
     var colorBarra  = esPrincipal ? "#FA523C" : "#F7C5BD";
@@ -304,7 +324,7 @@ function generarGraficaHTML(datos) {
     cols += [
       '<td style="width:', anchoColumna, '%;vertical-align:bottom;padding:0 4px;text-align:center;">',
 
-        // Porcentaje encima de la barra
+        // Porcentaje encima de la barra (valor real)
         '<div style="font-size:12px;font-weight:700;color:', colorTexto, ';margin-bottom:4px;">',
           pct, '%',
         '</div>',
@@ -365,9 +385,9 @@ function generarBloqueInterpretacionHTML(interp) {
       'margin-top:12px;',
       'box-shadow:0 1px 4px rgba(0,0,0,0.08);',
     '">',
-      subSeccion("💬", "¿Qué significa?",   interp.significado),
-      subSeccion("⚠️", "Ten en cuenta",     interp.advertencia),
-      subSeccion("✨", "Una salvedad",       interp.salvedad),
+      subSeccion("💬", "¿Qué significa?",  interp.significado),
+      subSeccion("⚠️", "Ten en cuenta",    interp.advertencia),
+      subSeccion("✨", "Recomendación",    interp.salvedad),
     '</div>'
   ].join('');
 }
@@ -408,7 +428,7 @@ function generarHTMLCorreo(nombre, datosRecibir, datosDar, interpRecibir, interp
       '">',
         '<img src="https://mariaterapeuta.com/images/logo_maria_terapeuta.png"',
           ' alt="María Terapeuta" width="140"',
-          ' style="display:block;margin:0 auto 16px;max-width:140px;">',
+          ' style="display:block;margin:0 auto 20px;max-width:140px;">',
         '<h1 style="margin:0;color:#ffffff;font-size:22px;font-weight:700;line-height:1.3;">',
           'Resultados: Test de Lenguajes del Amor',
         '</h1>',
@@ -421,11 +441,13 @@ function generarHTMLCorreo(nombre, datosRecibir, datosDar, interpRecibir, interp
         '<p style="font-size:16px;color:#3D2E2A;line-height:1.6;margin-top:0;">',
           'Hola <strong>', nombre, '</strong>,',
         '</p>',
+        '<p style="font-size:15px;color:#3D2E2A;line-height:1.6;">',
+          'Gracias por completar el test. A continuación encontrarás tus resultados en dos ',
+          'dimensiones: cómo prefieres <strong>recibir</strong> amor y cómo tiendes a ',
+          '<strong>expresarlo</strong>.',
+        '</p>',
         '<p style="font-size:15px;color:#3D2E2A;line-height:1.6;margin-bottom:28px;">',
-          'Gracias por completar el test. A continuación encontrarás tus resultados personalizados ',
-          'en dos dimensiones: cómo prefieres <strong>recibir</strong> amor y cómo tiendes a ',
-          '<strong>darlo</strong>. Conocer tus lenguajes puede transformar la forma en que te ',
-          'conectas con las personas que más quieres.',
+          'Este pequeño mapa puede ayudarte a comprender mejor lo que necesitas y también lo que ofreces.',
         '</p>',
 
         // ===== SECCIÓN RECIBIR =====
@@ -493,7 +515,7 @@ function generarHTMLCorreo(nombre, datosRecibir, datosDar, interpRecibir, interp
 
         // Botón WhatsApp
         '<div style="text-align:center;margin:28px 0;">',
-          '<a href="https://wa.me/34666905970?text=Hola!%20Acab%C3%A9%20el%20test%20de%20lenguajes%20del%20amor%20y%20me%20gustar%C3%ADa%20hablar%20con%20Mar%C3%ADa."',
+          '<a href="https://wa.me/34666905970?text=Hola!%20Acab%C3%A9%20el%20test%20de%20lenguajes%20del%20amor%20y%20me%20gustar%C3%ADa%20agendar%20una%20sesi%C3%B3n."',
             ' style="',
               'display:inline-block;',
               'background-color:#FA523C;',
@@ -505,7 +527,7 @@ function generarHTMLCorreo(nombre, datosRecibir, datosDar, interpRecibir, interp
               'border-radius:50px;',
               'letter-spacing:0.02em;',
             '">',
-            'Hablar con María',
+            'Agendar una sesión',
           '</a>',
         '</div>',
 
@@ -588,14 +610,14 @@ function diagnosticarUltimaFila() {
 
   Logger.log("--- Cabecera nombres (recodificación fila 1) ---");
   var cab = hojaRecod.getRange(1, 1, 1, 155).getValues()[0];
-  Logger.log("COL 140 → " + cab[140]);
-  Logger.log("COL 141 → " + cab[141]);
-  Logger.log("COL 142 → " + cab[142]);
-  Logger.log("COL 143 → " + cab[143]);
-  Logger.log("COL 144 → " + cab[144]);
-  Logger.log("COL 145 → " + cab[145]);
-  Logger.log("COL 146 → " + cab[146]);
-  Logger.log("COL 147 → " + cab[147]);
-  Logger.log("COL 148 → " + cab[148]);
-  Logger.log("COL 149 → " + cab[149]);
+  Logger.log("COL 140 (EK) → " + cab[140]);
+  Logger.log("COL 141 (EL) → " + cab[141]);
+  Logger.log("COL 142 (EM) → " + cab[142]);
+  Logger.log("COL 143 (EN) → " + cab[143]);
+  Logger.log("COL 144 (EO) → " + cab[144]);
+  Logger.log("COL 145 (EP) → " + cab[145]);
+  Logger.log("COL 146 (EQ) → " + cab[146]);
+  Logger.log("COL 147 (ER) → " + cab[147]);
+  Logger.log("COL 148 (ES) → " + cab[148]);
+  Logger.log("COL 149 (ET) → " + cab[149]);
 }
