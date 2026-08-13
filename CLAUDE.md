@@ -38,6 +38,23 @@ Package manager is **pnpm**.
 | `/test-parejas/lenguaje-del-amor` | Embedded Google Form quiz |
 | `/blog` | Placeholder (coming soon) |
 
+### Request Proxy (`proxy.ts`)
+
+`proxy.ts` (the `proxy` file convention — renamed from `middleware` in Next 16) gates every
+request. Any path not in its allowlist is legacy spam from a previous WordPress hack: bots
+get **410 Gone** (a faster deindex signal than 404), humans fall through to the Next 404 page.
+
+This is load-bearing for SEO, not dead code — it keeps ~1.26M discovered spam URLs out of
+Google's index. Two things will silently 410 to crawlers unless you allowlist them:
+
+- **New routes** — add the path to `VALID_PATHS`
+- **New files in `public/`** — `ALLOWED_PREFIXES` only covers `/_next/`, `/images/`, `/api/`
+  and `/.well-known/`, so anything else (a Search Console `googleXXXX.html` verification
+  file, `ads.txt`, `manifest.json`, a PDF) needs an `ALLOWED_EXACT` entry
+
+The failure mode is invisible locally: a browser loads the file fine while Googlebot gets
+410, because the 410 is gated on the user-agent.
+
 ### Component Conventions
 
 - Route files in `app/` are Server Components; interactive components use `"use client"`

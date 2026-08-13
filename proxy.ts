@@ -1,3 +1,7 @@
+// Proxy (formerly the `middleware` file convention, renamed in Next 16).
+// Serves 410 Gone to crawlers for the legacy WordPress spam URLs so Google
+// keeps deindexing them. Removing this would regress that cleanup.
+
 import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
 
@@ -29,7 +33,7 @@ const ALLOWED_EXACT = new Set([
 
 const BOT_UA_RE = /bot|crawl|spider|google|bing|yandex|baidu|slurp/i
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const raw = request.nextUrl.pathname
   // Normalize trailing slash so /diadica/ matches /diadica in VALID_PATHS.
   // Keep "/" as-is to avoid reducing it to an empty string.
