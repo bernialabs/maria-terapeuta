@@ -75,7 +75,7 @@ export default function Testimonials() {
                   ))}
                 </div>
                 <p className="text-lg leading-relaxed text-muted-foreground italic text-center">
-                  "{testimonials[currentIndex].content}"
+                  &quot;{testimonials[currentIndex].content}&quot;
                 </p>
                 <div className="text-center">
                   <p className="font-semibold text-lg">{testimonials[currentIndex].name}</p>
