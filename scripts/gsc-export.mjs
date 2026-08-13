@@ -2,6 +2,19 @@
 /**
  * GSC URL Export + Sitemap Generator
  *
+ * STATUS: retired 2026-08-13. The WordPress spam cleanup is complete — GSC
+ * reports 0 spam URLs indexed (5 indexed pages, all legitimate). The generated
+ * public/spam-cleanup-sitemap.xml, its middleware.ts allowance, and the
+ * googleapis dependency have all been removed. The 410-for-bots middleware
+ * stays in place to catch the long tail of discovered-but-uncrawled spam URLs.
+ *
+ * This script is kept only as a record of how the cleanup was done, and as a
+ * re-audit tool if spam ever resurfaces. To run it again you must first:
+ *   1. pnpm add -D googleapis
+ *   2. Create a new OAuth 2.0 Desktop client in Google Cloud Console and save
+ *      the downloaded JSON as scripts/credentials.json
+ *      (the original client was deleted 2026-08-13)
+ *
  * Usage: node scripts/gsc-export.mjs
  *
  * First run: prints an OAuth2 URL — open it in your browser, authorize, then

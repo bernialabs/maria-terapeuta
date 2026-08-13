@@ -25,7 +25,6 @@ const ALLOWED_EXACT = new Set([
   "/icon.svg",
   "/robots.txt",
   "/sitemap.xml",
-  "/spam-cleanup-sitemap.xml",
 ])
 
 const BOT_UA_RE = /bot|crawl|spider|google|bing|yandex|baidu|slurp/i
