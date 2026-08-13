@@ -66,12 +66,9 @@ The failure mode is invisible locally: a browser loads the file fine while Googl
 
 - Color palette: coral-red primary (`#FA523C`), orange-red secondary (`#F26749`), warm cream background (`#FAF2E8`)
 - All theme tokens defined in `app/globals.css`
-- Images are unoptimized (`next.config.mjs` sets `images.unoptimized: true`)
-
-## Pending Assets
-
-- **Hero and about images** — `public/images/maria-alejandra-1.jpeg` and `maria-alejandra-2.jpeg` need to be added (referenced by `hero.tsx` and `about.tsx`)
-- **Service images** — `services.tsx` uses Lucide icons as fallback; add an `image` property to each service entry to display photos instead
+- `next.config.mjs` defines only security headers (`X-Content-Type-Options`, `X-Frame-Options`,
+  `X-XSS-Protection`, `Referrer-Policy`) plus a one-year immutable `Cache-Control` for
+  `/images/*`. There is no `images` config, so Next's image optimization is active.
 
 ## No Environment Variables Required
 
