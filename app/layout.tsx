@@ -153,16 +153,71 @@ const jsonLd = {
       jobTitle: "Terapeuta en Sexología y Terapia de Pareja",
       image: "https://mariaterapeuta.com/images/maria_alejandra.png",
       url: "https://mariaterapeuta.com",
-      hasCredential: {
-        "@type": "EducationalOccupationalCredential",
-        credentialCategory: "Tarjeta Profesional de Psicólogo",
-        identifier: "194533",
-        recognizedBy: {
-          "@type": "Organization",
-          name: "Colegio Colombiano de Psicólogos (COLPSIC)",
-          addressCountry: "CO",
+      alumniOf: [
+        {
+          "@type": "CollegeOrUniversity",
+          name: "Universidad Autónoma de Madrid",
+          address: { "@type": "PostalAddress", addressCountry: "ES" },
         },
-      },
+        {
+          "@type": "CollegeOrUniversity",
+          name: "Universidad Complutense de Madrid",
+          address: { "@type": "PostalAddress", addressCountry: "ES" },
+        },
+        {
+          "@type": "CollegeOrUniversity",
+          name: "Universidad El Bosque",
+          address: { "@type": "PostalAddress", addressCountry: "CO" },
+        },
+      ],
+      hasCredential: [
+        {
+          "@type": "EducationalOccupationalCredential",
+          credentialCategory: "Tarjeta Profesional de Psicólogo",
+          identifier: "194533",
+          recognizedBy: {
+            "@type": "Organization",
+            name: "Colegio Colombiano de Psicólogos (COLPSIC)",
+            addressCountry: "CO",
+          },
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          credentialCategory: "Diploma de Especialización",
+          name: "Diploma de Especialización en Terapia Sexual y de Pareja",
+          educationalLevel: "Postgrado",
+          dateCreated: "2022",
+          recognizedBy: {
+            "@type": "CollegeOrUniversity",
+            name: "Universidad Autónoma de Madrid",
+            addressCountry: "ES",
+          },
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          credentialCategory: "Máster",
+          name: "Máster en Psicología",
+          educationalLevel: "Postgrado",
+          dateCreated: "2021",
+          recognizedBy: {
+            "@type": "CollegeOrUniversity",
+            name: "Universidad Complutense de Madrid",
+            addressCountry: "ES",
+          },
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          credentialCategory: "Grado universitario",
+          name: "Grado en Psicología",
+          educationalLevel: "Grado",
+          dateCreated: "2018",
+          recognizedBy: {
+            "@type": "CollegeOrUniversity",
+            name: "Universidad El Bosque",
+            addressCountry: "CO",
+          },
+        },
+      ],
       sameAs: [
         "https://www.instagram.com/soymariaterapeuta",
         "https://www.linkedin.com/in/ma-alejandra-ovalle-zuleta-8135a2124",

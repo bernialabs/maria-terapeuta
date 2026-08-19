@@ -4,6 +4,7 @@ import Benefits from "@/components/benefits"
 import Services from "@/components/services"
 import Percepciones from "@/components/percepciones"
 import About from "@/components/about"
+import Education from "@/components/education"
 import Testimonials from "@/components/testimonials"
 import Pricing from "@/components/pricing"
 import Location from "@/components/location"
@@ -76,6 +77,7 @@ export default function Home() {
         <Services />
         <Percepciones />
         <About />
+        <Education />
         <Testimonials />
         <Pricing />
         <Location />
