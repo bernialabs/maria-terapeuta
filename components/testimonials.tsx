@@ -7,11 +7,32 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 
 const testimonials = [
   {
+    name: "Felipe",
+    content:
+      "La terapia con Alejandra ha sido de gran ayuda. He logrado ver mis problemas desde un punto de vista más comprensible. Desde el primer día entre nuestras charlas me ha hecho notar las dificultades que tengo para reconocer y afrontar mis emociones. Estoy feliz de haberla encontrado y tenerla como terapeuta.",
+    rating: 5,
+    date: "27.06.2026",
+  },
+  {
+    name: "Raquel",
+    content:
+      "Hace poquito que hemos empezado la terapia y estamos encantados. Con solo 4 sesiones que llevamos hemos aumentado en cuanto a ganas y confianza. Recomendable sin duda. No solo te ayuda en cuanto a pareja, si no que te ayuda a lo personal que después puedes enfocar en las relaciones ya sea de pareja o demás.",
+    rating: 5,
+    date: "01.03.2026",
+  },
+  {
     name: "Alexandra",
     content:
       "Llevo unos meses en terapia con María y no puedo estar más contenta con el proceso. Desde el principio me he sentido muy cómoda con ella y he notado un avance real. Es una terapeuta muy cercana, empática y profesional. La recomiendo muchísimo!",
     rating: 5,
     date: "13.01.2026",
+  },
+  {
+    name: "Natalia",
+    content:
+      "Excelente profesional, muy empática y cercana. Desde el primer día me hizo sentir cómoda y escuchada, y su acompañamiento ha sido clave para mi bienestar. Totalmente recomendada.",
+    rating: 5,
+    date: "18.12.2025",
   },
   {
     name: "Camila",
@@ -21,25 +42,18 @@ const testimonials = [
     date: "23.11.2025",
   },
   {
-    name: "Paciente",
-    content:
-      "Llevo cerca de 3 meses con Alejandra y la verdad es que he notado mucha mejoría en mi día a día, y lo mejor es que cada vez va mejor. Muy buena profesional y completamente recomendable.",
-    rating: 5,
-    date: "18.10.2025",
-  },
-  {
-    name: "Paciente",
-    content:
-      "Excelente profesional, muy empática y cercana. Desde el primer día me hizo sentir cómoda y escuchada, y su acompañamiento ha sido clave para mi bienestar. Totalmente recomendada.",
-    rating: 5,
-    date: "18.12.2025",
-  },
-  {
-    name: "Paciente",
+    name: "Raquel y Aron",
     content:
       "Maria Alejandra demuestra mucha paciencia y muchas habilidades como terapeuta. Nos está ayudando a comunicarnos mejor cómo pareja y a superar las situaciones desagradables que hemos vivido. Estamos muy agradecidos por la ayuda y por las herramientas que estamos recibiendo sesión tras sesión",
     rating: 5,
     date: "18.11.2025",
+  },
+  {
+    name: "Raúl",
+    content:
+      "Llevo cerca de 3 meses con Alejandra y la verdad es que he notado mucha mejoría en mi día a día, y lo mejor es que cada vez va mejor. Muy buena profesional y completamente recomendable.",
+    rating: 5,
+    date: "18.10.2025",
   },
 ]
 

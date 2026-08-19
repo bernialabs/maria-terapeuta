@@ -95,10 +95,11 @@ export default function TestParejasPage() {
                   </div>
                   <div>
                     <h2 className="text-xl md:text-2xl font-serif font-semibold mb-3 text-balance">
-                      {"¿Tu relación cayó en la monotonía?"}
+                      {"¿Conexión, rutina o aburrimiento?"}
+                      {"Descubre el estado de tu relación"}
                     </h2>
                     <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
-                      {"Descubre si la rutina se ha apoderado de tu relación y encuentra claves para reavivar la chispa que los conectó desde el inicio."}
+                      {"Conoce cómo está tu relación, identifica sus fortalezas y áreas de mejora, y descubre cómo fortalecerla."}
                     </p>
                   </div>
                   <div className="flex items-center gap-2 text-secondary font-medium text-sm group-hover:gap-3 transition-all">
