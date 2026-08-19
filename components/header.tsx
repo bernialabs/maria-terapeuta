@@ -62,7 +62,7 @@ export default function Header({ variant = "default" }: { variant?: "default" | 
               Inicio
             </Link>
             <Link href="/test-parejas" className="text-sm font-medium hover:text-secondary transition-colors">
-              Test Parejas
+              Test Parejas GRATUITOS
             </Link>
             <Link href="/diadica" className="text-sm font-medium hover:text-secondary transition-colors">
               {"Diadica"}

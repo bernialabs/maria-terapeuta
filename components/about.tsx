@@ -33,7 +33,7 @@ export default function About() {
             </p>
 
             <h3 className="text-2xl font-serif font-semibold pt-2 text-primary">
-              {"¿Qué puedes trabajar y lograr en las sesiones?"}
+              {"¿Qué podemos trabajar y lograr en las sesiones?"}
             </h3>
             <ul className="space-y-3 text-lg text-muted-foreground leading-relaxed">
               <li className="flex items-start gap-3">

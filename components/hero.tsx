@@ -36,7 +36,7 @@ export default function Hero() {
             </div>
             <div className="flex items-center gap-8 pt-4">
               <div>
-                <div className="text-3xl font-serif font-semibold text-primary">3+</div>
+                <div className="text-3xl font-serif font-semibold text-primary">4+</div>
                 <div className="text-sm text-muted-foreground">{"Años de experiencia"}</div>
               </div>
               <div className="h-12 w-px bg-border" />
