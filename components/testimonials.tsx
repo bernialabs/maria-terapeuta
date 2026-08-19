@@ -3,7 +3,8 @@
 import { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ArrowUpRight, BadgeCheck, ChevronLeft, ChevronRight } from "lucide-react"
+import { CLEARLY_PROFILE_URL } from "@/lib/constants"
 
 const testimonials = [
   {
@@ -57,6 +58,12 @@ const testimonials = [
   },
 ]
 
+const averageRating = (
+  testimonials.reduce((sum, testimonial) => sum + testimonial.rating, 0) / testimonials.length
+)
+  .toFixed(1)
+  .replace(".", ",")
+
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0)
 
@@ -75,6 +82,13 @@ export default function Testimonials() {
           <h2 className="text-4xl md:text-5xl font-serif font-light mb-4">
             Lo que dicen mis <span className="font-semibold text-secondary">pacientes</span>
           </h2>
+          <p className="mt-4 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-sm text-muted-foreground">
+            <BadgeCheck className="w-5 h-5 text-secondary flex-shrink-0" aria-hidden="true" />
+            <span>
+              <span className="text-secondary">★</span> {averageRating} · Reseñas verificadas en
+              Clearly
+            </span>
+          </p>
         </div>
 
         <div className="max-w-4xl mx-auto">
@@ -118,6 +132,19 @@ export default function Testimonials() {
             <Button variant="outline" size="icon" onClick={next} aria-label="Siguiente testimonio">
               <ChevronRight className="w-5 h-5" />
             </Button>
+          </div>
+
+          <div className="flex justify-center mt-6">
+            <a
+              href={CLEARLY_PROFILE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Ver el perfil de María Alejandra Ovalle en Clearly (se abre en una pestaña nueva)"
+              className="inline-flex items-center gap-1.5 text-sm text-muted-foreground underline decoration-border underline-offset-4 transition-colors hover:text-secondary hover:decoration-secondary"
+            >
+              Ver perfil en Clearly
+              <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
+            </a>
           </div>
         </div>
       </div>

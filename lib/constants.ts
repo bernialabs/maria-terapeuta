@@ -9,3 +9,6 @@ export const SOCIAL_LINKS = {
   tiktok: "https://www.tiktok.com/@soymariaterapeuta",
   linkedin: "https://www.linkedin.com/in/ma-alejandra-ovalle-zuleta-8135a2124",
 }
+
+export const CLEARLY_PROFILE_URL =
+  "https://www.clearly.help/es/therapist/maria-alejandra-ovalle-zuleta"
