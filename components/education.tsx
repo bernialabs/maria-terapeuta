@@ -75,16 +75,16 @@ export default function Education() {
                 <BookOpen className="w-6 h-6 text-secondary" />
               </div>
               <h3 className="text-2xl font-serif font-semibold text-foreground">
-                Cursos y formación continua
+                Formación continua
               </h3>
             </div>
 
-            <ul className="flex flex-col gap-6">
+            <ul className="flex flex-col gap-8">
               {cursos.map((curso) => (
                 <li key={curso.title} className="flex items-start gap-3">
                   <Check className="w-5 h-5 text-secondary flex-shrink-0 mt-1" />
                   <div>
-                    <h4 className="text-base font-serif font-semibold text-foreground leading-snug">
+                    <h4 className="text-lg font-serif font-semibold text-foreground leading-snug">
                       {curso.title}
                     </h4>
                     <p className="text-sm text-muted-foreground mt-1">{curso.institution}</p>
@@ -96,7 +96,7 @@ export default function Education() {
         </div>
 
         <p className="text-sm text-muted-foreground text-center mt-10">
-          {"Tarjeta Profesional de Psicólogo n.º 194533 · Colegio Colombiano de Psicólogos (COLPSIC)"}
+          {"Tarjeta Profesional de Psicólogo n.º 194533"}
         </p>
       </div>
     </section>
